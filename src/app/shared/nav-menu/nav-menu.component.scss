@@ -1,0 +1,58 @@
+.colorBack {
+  background-color: #273580;
+  .container {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    .textoHeader {
+      color: white;
+      font-size: 27px;
+    }
+    .imgLogo {
+      width: 65px;
+      margin-left: 20px;
+    }
+  }
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .textoHeader {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .textoHeader {
+    display: block;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
+.btnUser {
+  border-radius: 50%;
+  fa-icon {
+    font-size: 20px;
+  }
+}
+
+.drownuser {
+  position: relative;
+  flex: 1 1 auto;
+}

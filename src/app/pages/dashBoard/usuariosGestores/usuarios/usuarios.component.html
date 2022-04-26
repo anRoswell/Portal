@@ -1,0 +1,142 @@
+<!--<p>This component demonstrates fetching data from the server.</p>-->
+
+<p *ngIf="!datos"><em>Loading...</em></p>
+
+<div class="row">
+  <div class="col-md-12 divTitle">
+    <h2 id="tableLabel">Usuarios</h2>
+    <div>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="openModalWithComponent(0, {}, 'Crear', 'create')"
+        *appRole="['Grabar']"
+      >
+        <fa-icon [icon]="faPlus"></fa-icon>
+        Nuevo
+      </button>
+    </div>
+  </div>
+</div>
+
+<alert
+  [type]="typeAlert"
+  dismissOnTimeout="5000"
+  [dismissible]="dismissible"
+  *ngIf="isVisibleAlert"
+  (onClosed)="onClosedAlert($event)"
+>
+  <strong>{{ msg }}</strong>
+</alert>
+
+<p-table
+  #dt1
+  dataKey="id"
+  [value]="datos"
+  [paginator]="true"
+  [rows]="10"
+  [showCurrentPageReport]="true"
+  responsiveLayout="scroll"
+  currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [loading]="loading"
+  styleClass="p-datatable-sm"
+  [globalFilterFields]="[
+    'id',
+    'usrCedula',
+    'usrEmail',
+    'FechaRegistro',
+    'usrNombreCompleto'
+  ]"
+  responsiveLayout="stack"
+>
+  <ng-template pTemplate="caption">
+    <div class="divTableSearch">
+      <button
+        pButton
+        label="Limpiar"
+        class="btn btn-primary"
+        icon="pi pi-filter-slash"
+        (click)="clear(dt1)"
+      >
+        Limpiar
+      </button>
+      <span class="p-input-icon-right ml-auto">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+          placeholder="Buscar por palabra"
+        />
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th class="text-center" pSortableColumn="id">
+        <div class="flex justify-content-center align-items-center">
+          Id <p-sortIcon field="id"></p-sortIcon>
+          <p-columnFilter
+            type="numeric"
+            field="id"
+            display="menu"
+          ></p-columnFilter>
+        </div>
+      </th>
+      <th pSortableColumn="usrCedula">
+        Cedula <p-sortIcon field="usrCedula"></p-sortIcon>
+      </th>
+      <th pSortableColumn="usrEmail">
+        Email <p-sortIcon field="usrEmail"></p-sortIcon>
+      </th>
+      <th pSortableColumn="FechaRegistro">
+        Fecha registro <p-sortIcon field="FechaRegistro"></p-sortIcon>
+      </th>
+      <th pSortableColumn="usrNombreCompleto">
+        Nombres <p-sortIcon field="usrNombreCompleto"></p-sortIcon>
+      </th>
+      <th>Aciones</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-person>
+    <tr>
+      <td style="width: 10%">{{ person.id }}</td>
+      <td style="width: 10%">{{ person.usrCedula }}</td>
+      <td style="width: 20%">{{ person.usrEmail }}</td>
+      <td style="width: 15%">
+        {{ person.fechaRegistro | date: "dd/MM/yyyy" }}
+      </td>
+      <td style="width: 20%">{{ person.usrNombreCompleto }}</td>
+      <td style="width: 10%">
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="
+            openModalWithComponent(person.id, person, 'Editar', 'update')
+          "
+          *appRole="['Editar']"
+        >
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>
+
+        <button
+          type="button"
+          class="btn"
+          tooltip="Permite resetear la contraseña al usuario"
+          (click)="resetPassword(person)"
+          *appRole="['Editar']"
+        >
+          <fa-icon [icon]="faKey"></fa-icon>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="5" class="tableRegisterNotFound">
+        Registros no encontrados!!!
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

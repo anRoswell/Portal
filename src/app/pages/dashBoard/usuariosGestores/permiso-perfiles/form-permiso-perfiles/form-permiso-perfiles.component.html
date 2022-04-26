@@ -1,0 +1,148 @@
+<div class="contenido mb-3">
+  <h2>{{ editando ? "Editar" : "Crear" }} Permiso</h2>
+
+  <alert type="danger" *ngIf="validationMsg" dismissOnTimeout="5000">
+    <strong>{{ msgError }}</strong>
+  </alert>
+
+  <form [formGroup]="form" (ngSubmit)="guardar(form.value)">
+    <div class="formContenido">
+      <div class="mb-3 row">
+        <label>Perfil</label>
+        <ng-select
+          [items]="perfiles"
+          [selectOnTab]="true"
+          bindLabel="prfNombrePerfil"
+          bindValue="id"
+          placeholder="Seleccione Perfil"
+          formControlName="pmpPrfCodPerfil"
+          [loading]="peopleLoading"
+          [searchFn]="customSearchFn"
+        >
+        </ng-select>
+        <div class="validationErrorRed">
+          <ng-container
+            *ngFor="let validation of validation_messages.pmpPrfCodPerfil"
+          >
+            <div
+              *ngIf="
+                (form.get('pmpPrfCodPerfil')?.hasError(validation.type) &&
+                  form.get('pmpPrfCodPerfil')?.dirty) ||
+                (form.get('pmpPrfCodPerfil')?.touched &&
+                  form.get('pmpPrfCodPerfil')?.hasError(validation.type))
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="email">Menu</label>
+
+        <ng-select
+          [items]="menus"
+          [selectOnTab]="true"
+          bindLabel="menModuloDescripcion"
+          bindValue="id"
+          placeholder="Seleccione Perfil"
+          formControlName="pmpMenCodMenu"
+          [loading]="peopleLoading"
+          [searchFn]="customSearchFn2"
+        >
+        </ng-select>
+        <div class="validationErrorRed">
+          <ng-container
+            *ngFor="let validation of validation_messages.pmpMenCodMenu"
+          >
+            <div
+              *ngIf="
+                (form.get('pmpMenCodMenu')?.hasError(validation.type) &&
+                  form.get('pmpMenCodMenu')?.dirty) ||
+                (form.get('pmpMenCodMenu')?.touched &&
+                  form.get('pmpMenCodMenu')?.hasError(validation.type))
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="row">
+        <div class="flexRow">
+          <div class="flexRowItem">
+            <label for="chkEjecutar">Ejecutar</label>
+            <input
+              type="checkbox"
+              formControlName="pmpEjecutar"
+              class="form-check-input"
+              id="chkEjecutar"
+            />
+          </div>
+          <div class="flexRowItem">
+            <label for="chkLeer">Leer</label>
+            <input
+              type="checkbox"
+              formControlName="pmpLeer"
+              class="form-check-input"
+              id="chkLeer"
+            />
+          </div>
+          <div class="flexRowItem">
+            <label for="chkEditar">Editar</label>
+            <input
+              type="checkbox"
+              formControlName="pmpEditar"
+              class="form-check-input"
+              id="chkEditar"
+            />
+          </div>
+          <div class="flexRowItem">
+            <label for="chkGrabar">Grabar</label>
+            <input
+              type="checkbox"
+              formControlName="pmpGrabar"
+              class="form-check-input"
+              id="chkGrabar"
+            />
+          </div>
+          <div class="flexRowItem">
+            <label for="chkBorrar">Borrar</label>
+            <input
+              type="checkbox"
+              formControlName="pmpBorrar"
+              class="form-check-input"
+              id="chkBorrar"
+            />
+          </div>
+          <div class="flexRowItem">
+            <label for="chkConsultar">Consultar</label>
+            <input
+              type="checkbox"
+              formControlName="pmpConsultar"
+              class="form-check-input"
+              id="chkConsultar"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+      <button
+        type="submit"
+        class="btn btn-block btn-success"
+        *appRole="['Grabar', 'Editar']"
+      >
+        <fa-icon [icon]="faSave"></fa-icon>
+        {{ textBtn }}
+      </button>
+
+      <button type="button" class="btn btn-danger" (click)="cancelar()">
+        <fa-icon [icon]="faWindowClose"></fa-icon>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

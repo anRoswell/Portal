@@ -1,0 +1,1783 @@
+<header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light colorBack border-bottom box-shadow mb-3"
+  >
+    <div class="container-fluid">
+      <img class="navbar-brand imgLogo" [src]="logo" alt="" />
+      <a class="navbar-brand textoHeader" [routerLink]="['/']"
+        >Portal de Proveedores</a
+      >
+
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+      >
+        <ul class="navbar-nav flex-grow"></ul>
+      </div>
+      <button class="btn btn-danger" (click)="closeModal()" *ngIf="!showButton">
+        <fa-icon [icon]="faWindowClose"></fa-icon>
+        Close
+      </button>
+    </div>
+  </nav>
+</header>
+
+<div class="container mt-3" id="formulario">
+  <div
+    class="row rowCaptcha"
+    style="display: flex; justify-content: space-between; align-items: center"
+  >
+    <div style="width: auto">
+      <p-captcha
+        *ngIf="showCaptcha"
+        siteKey="6Le7zksfAAAAAP3Htg5koYYxc-l8qltwieAMiBAQ"
+        (onResponse)="showResponse($event)"
+      ></p-captcha>
+    </div>
+    <div>
+      <button class="btn btn-danger" (click)="showDialog()" *ngIf="showButton">
+        ¡Haz click aqui para editar su informacion registrada!!!
+        <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+    </div>
+  </div>
+
+  <p-dialog header="Editar Proveedor" [(visible)]="display">
+    <div>
+      <form [formGroup]="form02" (ngSubmit)="validEditProveedor(form02)">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Nit</label>
+          <input type="number" class="form-control" formControlName="PrvNit" />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage02.PrvNit"
+            >
+              <div *ngIf="isValid02('PrvNit', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label"
+            >Código validación</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            formControlName="PrvCodValidation"
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage02.PrvCodValidation"
+            >
+              <div *ngIf="isValid02('PrvCodValidation', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="form-text">
+            ¡Código enviado por email al momento de registrarse!
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Consultar</button>
+      </form>
+    </div>
+  </p-dialog>
+
+  <form [formGroup]="form" (ngSubmit)="guardar(form.value)">
+    <tabset>
+      <tab id="tab1" class="tab" [ngClass]="{ disabledDiv: varDisabledDiv }">
+        <ng-template tabHeading>
+          Formulario
+          <fa-icon
+            [icon]="faCheck"
+            [ngClass]="{
+              iconColorTrue: true
+            }"
+            *ngIf="showButton"
+          ></fa-icon
+        ></ng-template>
+        <alert type="danger" *ngIf="validationMsg" dismissOnTimeout="5000">
+          <strong>{{ msgError }}</strong>
+        </alert>
+
+        <div class="datosPersonales">
+          <h1>Datos del Proveedor</h1>
+          <div class="row mb-3">
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Fecha Envio</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  formControlName="prvFechaEnvio"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.prvFechaEnvio"
+                  >
+                    <div *ngIf="isValid('prvFechaEnvio', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-7">
+              <div>
+                <label for="email" class="form-label"
+                  >Nombre o Razón social de la emepresa</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvNombreProveedor"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvNombreProveedor
+                    "
+                  >
+                    <div *ngIf="isValid('PrvNombreProveedor', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3">
+              <div>
+                <label for="email" class="form-label">No. Documento</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvNit"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvNit"
+                  >
+                    <div *ngIf="isValid('PrvNit', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4 col-lg-4">
+              <div>
+                <label for="email" class="form-label"
+                  >Dirección completa de la empresa</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvDireccion"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvDireccion"
+                  >
+                    <div *ngIf="isValid('PrvDireccion', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3">
+              <div>
+                <label for="email" class="form-label">Departamento</label>
+                <ng-select
+                  formControlName="departamento"
+                  [items]="departamentos"
+                  [selectOnTab]="true"
+                  bindLabel="departamento1"
+                  bindValue="codigoDepartamento"
+                  placeholder="Seleccione Departamento"
+                  [loading]="peopleLoading"
+                  [searchFn]="customSearchFnDepa"
+                  (change)="changeDepartamento()"
+                >
+                </ng-select>
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.departamento"
+                  >
+                    <div *ngIf="isValid('departamento', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3">
+              <div>
+                <label for="email" class="form-label">Ciudad</label>
+                <ng-select
+                  [items]="ciudadesFilter"
+                  [selectOnTab]="true"
+                  formControlName="PrvCodCiudad"
+                  bindLabel="ciudad"
+                  bindValue="codigoCiudad"
+                  placeholder="Seleccione Ciudad"
+                  [loading]="peopleLoading"
+                  [searchFn]="customSearchFnCiudad"
+                >
+                </ng-select>
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvCodCiudad"
+                  >
+                    <div *ngIf="isValid('PrvCodCiudad', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Telefono(s)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvTelefono"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvTelefono"
+                  >
+                    <div *ngIf="isValid('PrvTelefono', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-8 col-lg-8">
+              <div>
+                <label for="email" class="form-label"
+                  >Persona contacto (Proveedor)
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvContacto"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvContacto"
+                  >
+                    <div *ngIf="isValid('PrvContacto', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+              <div>
+                <label for="email" class="form-label">Telefono Móvil</label>
+                <input type="text" class="form-control" />
+                <!--<div class="validationErrorRed ion-text-center">
+                              <ng-container
+                                *ngFor="let validation of validationsMessage.prfNombrePerfil"
+                              >
+                                <div *ngIf="isValid('prfNombrePerfil', validation.type)">
+                                  <small>{{ validation.message }}</small>
+                                </div>
+                              </ng-container>
+                            </div>-->
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-4 col-lg-4">
+              <div>
+                <label for="email" class="form-label"
+                  >Correo Electronico 1</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvMail"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvMail"
+                  >
+                    <div *ngIf="isValid('PrvMail', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+              <div>
+                <label for="email" class="form-label"
+                  >Correo Electronico 2</label
+                >
+                <input type="text" class="form-control" />
+                <!--<div class="validationErrorRed ion-text-center">
+                              <ng-container
+                                *ngFor="let validation of validationsMessage.prfNombrePerfil"
+                              >
+                                <div *ngIf="isValid('prfNombrePerfil', validation.type)">
+                                  <small>{{ validation.message }}</small>
+                                </div>
+                              </ng-container>
+                            </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="socios">
+          <h1>Socios/Accionistas</h1>
+          <div class="row">
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="addSocio()"
+              >
+                <fa-icon [icon]="faPlus"></fa-icon>
+                Agregar
+              </button>
+            </div>
+          </div>
+
+          <div formArrayName="PrvSocios">
+            <div
+              class="row"
+              *ngFor="let quantity of socios().controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="col-md-3 col-lg-3">
+                <div>
+                  <label for="email" class="form-label"
+                    >Nombre y Apellido</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="socNombre"
+                  />
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="let validation of validationsMessage.socNombre"
+                    >
+                      <div
+                        *ngIf="
+                          isvalidArray('socNombre', validation.type, quantity)
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-lg-2">
+                <div>
+                  <label for="email" class="form-label">Identificación</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="socIdentificacion"
+                  />
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="
+                        let validation of validationsMessage.socIdentificacion
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          isvalidArray(
+                            'socIdentificacion',
+                            validation.type,
+                            quantity
+                          )
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-1 col-lgfa-stack-1x">
+                <div>
+                  <label for="email" class="form-label">C.V.</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    formControlName="socCodValidacion"
+                  />
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="
+                        let validation of validationsMessage.PrvRteLegalIdentificacion
+                      "
+                    >
+                      <div
+                        *ngIf="
+                          isValid('PrvRteLegalIdentificacion', validation.type)
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-2 col-lg-2">
+                <div>
+                  <label class="form-label">Ciudad</label>
+
+                  <ng-select
+                    [items]="ciudades"
+                    [selectOnTab]="true"
+                    formControlName="socCodCiudad"
+                    bindLabel="ciudad"
+                    bindValue="codigoCiudad"
+                    placeholder="Seleccione Ciudad"
+                    [loading]="peopleLoading"
+                    [searchFn]="customSearchFnCiudad"
+                  ></ng-select>
+
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="let validation of validationsMessage.socCodCiudad"
+                    >
+                      <div
+                        *ngIf="
+                          isvalidArray(
+                            'socCodCiudad',
+                            validation.type,
+                            quantity
+                          )
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 col-lg-3">
+                <div>
+                  <label for="email" class="form-label">Dirección</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="socDireccion"
+                  />
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="let validation of validationsMessage.socDireccion"
+                    >
+                      <div
+                        *ngIf="
+                          isvalidArray(
+                            'socDireccion',
+                            validation.type,
+                            quantity
+                          )
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-1">
+                <button
+                  type="button"
+                  class="btn btn-danger btndelete"
+                  (click)="removeSocio(i)"
+                >
+                  <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="representantelegal">
+          <h1>Representante Legal</h1>
+          <div class="row mb-3">
+            <div class="col-md-3 col-lg-3">
+              <div>
+                <label for="email" class="form-label">Nombre y Apellido</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalNombre"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalNombre
+                    "
+                  >
+                    <div *ngIf="isValid('PrvRteLegalNombre', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Identificación</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalIdentificacion"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalIdentificacion
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        isValid('PrvRteLegalIdentificacion', validation.type)
+                      "
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-1 col-lgfa-stack-1x">
+              <div>
+                <label for="email" class="form-label">C.V.</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="PrvRteLegalCodigoVerificacion"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalIdentificacion
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        isValid('PrvRteLegalIdentificacion', validation.type)
+                      "
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Ciudad</label>
+                <ng-select
+                  [items]="ciudades"
+                  [selectOnTab]="true"
+                  formControlName="PrvRteLegalCodCiudad"
+                  bindLabel="ciudad"
+                  bindValue="codigoCiudad"
+                  placeholder="Seleccione Ciudad"
+                  [loading]="peopleLoading"
+                  [searchFn]="customSearchFnCiudad"
+                ></ng-select>
+
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalCodCiudad
+                    "
+                  >
+                    <div
+                      *ngIf="isValid('PrvRteLegalCodCiudad', validation.type)"
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Telefono Movil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalTelefonoMovil"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalTelefonoMovil
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        isValid('PrvRteLegalTelefonoMovil', validation.type)
+                      "
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalEmail"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalEmail
+                    "
+                  >
+                    <div *ngIf="isValid('PrvRteLegalEmail', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="representantelegal">
+          <h1>Revisor Fiscal</h1>
+          <div class="row mb-3">
+            <div class="col-md-3 col-lg-3">
+              <div>
+                <label for="email" class="form-label">Nombre y Apellido</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalNombre"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalNombre
+                    "
+                  >
+                    <div *ngIf="isValid('PrvRteLegalNombre', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Identificación</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalIdentificacion"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalIdentificacion
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        isValid('PrvRteLegalIdentificacion', validation.type)
+                      "
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-1 col-lgfa-stack-1x">
+              <div>
+                <label for="email" class="form-label">C.V.</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="prvRevisorFiscalCodigoVerificacion"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalIdentificacion
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        isValid('PrvRteLegalIdentificacion', validation.type)
+                      "
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Ciudad</label>
+                <ng-select
+                  [items]="ciudades"
+                  [selectOnTab]="true"
+                  formControlName="PrvRteLegalCodCiudad"
+                  bindLabel="ciudad"
+                  bindValue="codigoCiudad"
+                  placeholder="Seleccione Ciudad"
+                  [loading]="peopleLoading"
+                  [searchFn]="customSearchFnCiudad"
+                ></ng-select>
+
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalCodCiudad
+                    "
+                  >
+                    <div
+                      *ngIf="isValid('PrvRteLegalCodCiudad', validation.type)"
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Telefono Movil</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalTelefonoMovil"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalTelefonoMovil
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        isValid('PrvRteLegalTelefonoMovil', validation.type)
+                      "
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2">
+              <div>
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvRteLegalEmail"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvRteLegalEmail
+                    "
+                  >
+                    <div *ngIf="isValid('PrvRteLegalEmail', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detalleBancario">
+          <h1>Detalles Bancarios</h1>
+          <div class="row mb-3">
+            <div class="col-md-4 col-lg-4">
+              <div>
+                <label for="email" class="form-label">Banco</label>
+                <ng-select
+                  [items]="bancos"
+                  [selectOnTab]="true"
+                  formControlName="PrvCodBanco"
+                  bindLabel="banDescripcion"
+                  bindValue="id"
+                  placeholder="Seleccione Banco"
+                  [loading]="peopleLoading"
+                  [searchFn]="customSearchFnBanco"
+                >
+                </ng-select>
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvCodBanco"
+                  >
+                    <div *ngIf="isValid('PrvCodBanco', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div>
+                <label for="email" class="form-label">Numero de Cuenta</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvDtllesBanNroCuenta"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvDtllesBanNroCuenta
+                    "
+                  >
+                    <div
+                      *ngIf="isValid('PrvDtllesBanNroCuenta', validation.type)"
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+              <label for="email" class="form-label">Tipo de Cuenta</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="radioCorri"
+                    value="1"
+                    formControlName="PrvCodTipoCuenta"
+                  />
+                  <label class="form-check-label labelTexto" for="radioCorri"
+                    >Corriente</label
+                  >
+                </div>
+
+                <!-- Material inline 2 -->
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="radioAhorro"
+                    value="2"
+                    formControlName="PrvCodTipoCuenta"
+                  />
+                  <label class="form-check-label labelTexto" for="radioAhorro"
+                    >Ahorros</label
+                  >
+                </div>
+
+                <!--<div class="validationErrorRed ion-text-center">
+                              <ng-container
+                                *ngFor="let validation of validationsMessage.prfNombrePerfil"
+                              >
+                                <div *ngIf="isValid('prfNombrePerfil', validation.type)">
+                                  <small>{{ validation.message }}</small>
+                                </div>
+                              </ng-container>
+                            </div>-->
+              </div>
+
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage.PrvCodTipoCuenta"
+                >
+                  <div *ngIf="isValid('PrvCodTipoCuenta', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tipoProveedor">
+          <h1>Tipo de Proveedor</h1>
+          <div class="row mb-3">
+            <div class="col-md-3 col-lg-3">
+              <label>Seleccione</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="radioNatural"
+                    value="1"
+                    formControlName="PrvProveeedor"
+                  />
+                  <label class="form-check-label labelTexto" for="radioNatural"
+                    >Natural</label
+                  >
+                </div>
+
+                <!-- Material inline 2 -->
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="radioJuridica"
+                    value="2"
+                    formControlName="PrvProveeedor"
+                  />
+                  <label class="form-check-label labelTexto" for="radioJuridica"
+                    >Juridica</label
+                  >
+                </div>
+                <!--<div class="validationErrorRed ion-text-center">
+                              <ng-container
+                                *ngFor="let validation of validationsMessage.prfNombrePerfil"
+                              >
+                                <div *ngIf="isValid('prfNombrePerfil', validation.type)">
+                                  <small>{{ validation.message }}</small>
+                                </div>
+                              </ng-container>
+                            </div>-->
+              </div>
+
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage.PrvProveeedor"
+                >
+                  <div *ngIf="isValid('PrvProveeedor', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3">
+              <div>
+                <label for="email" class="form-label">Seleccione</label>
+                <ng-select
+                  [items]="tipoProveedores"
+                  formControlName="PrvCodTipoProveeedor"
+                  [selectOnTab]="true"
+                  bindLabel="tipPrvNombreTipoProveedor"
+                  bindValue="id"
+                  placeholder="Seleccione Tipo Proveedor"
+                  [loading]="peopleLoading"
+                  [searchFn]="customSearchFnTipoPro"
+                  (change)="changeTipoProveedor()"
+                >
+                </ng-select>
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvCodTipoProveeedor
+                    "
+                  >
+                    <div
+                      *ngIf="isValid('PrvCodTipoProveeedor', validation.type)"
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-6" *ngIf="verCualTipoProve">
+              <div>
+                <label for="email" class="form-label">Cual</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="prvTipoProveedorCual"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.prvTipoProveedorCual
+                    "
+                  >
+                    <div
+                      *ngIf="isValid('prvTipoProveedorCual', validation.type)"
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="infoProducto">
+          <h1>Información del Producto o Servicio</h1>
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <label class="form-label">Seleccione</label>
+              <ng-select
+                [items]="productos"
+                formControlName="ListProdServicios"
+                [selectOnTab]="true"
+                bindLabel="proSerDescripcion"
+                bindValue="id"
+                [multiple]="true"
+                placeholder="Seleccione Producto o Servicio"
+                [loading]="peopleLoading"
+                [searchFn]="customSearchFnProduc"
+              >
+              </ng-select>
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage.ListProdServicios
+                  "
+                >
+                  <div *ngIf="isValid('ListProdServicios', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="condicionesPago">
+          <h1>Condiciones de Pago</h1>
+          <div class="row mb-3">
+            <div class="col-md-3 col-lg-3">
+              <label class="form-label">Seleccione Tipo de Pago</label>
+              <ng-select
+                [items]="condicionesPago"
+                [selectOnTab]="true"
+                formControlName="PrvCpaCodCondicionesPago"
+                bindLabel="condDescripcion"
+                bindValue="id"
+                placeholder="Seleccione Dias"
+                [loading]="peopleLoading"
+                [searchFn]="customSearchFnCondi"
+                (change)="changeTipoPago()"
+              >
+              </ng-select>
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage.PrvCpaCodCondicionesPago
+                  "
+                >
+                  <div
+                    *ngIf="isValid('PrvCpaCodCondicionesPago', validation.type)"
+                  >
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-lg-4" *ngIf="verCualTipoPago">
+              <div>
+                <label for="email" class="form-label">Cual</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="PrvCpaCual"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.PrvCpaCual"
+                  >
+                    <div *ngIf="isValid('PrvCpaCual', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-5 col-lg-5" *ngIf="verPorcentajePago">
+              <label class="form-label"
+                >Si el pago es de contado indique el % de descuento</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                formControlName="PrvCpaContadoCual"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage.PrvCpaContadoCual
+                  "
+                >
+                  <div *ngIf="isValid('PrvCpaContadoCual', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-12 col-lg-12">
+              <label class="form-label">Seleccione Agengia</label>
+              <ng-select
+                [items]="empresas"
+                formControlName="ListEmpresas"
+                [selectOnTab]="true"
+                bindLabel="empNombreEmpresa"
+                [multiple]="true"
+                bindValue="id"
+                placeholder="Seleccione Agencia"
+                [loading]="peopleLoading"
+                [searchFn]="customSearchFnEmpresa"
+              >
+              </ng-select>
+            </div>
+          </div>
+        </div>
+
+        <div class="referencias">
+          <h1>Referencias</h1>
+          <div class="row mb-3">
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-success"
+                (click)="addReferencia()"
+              >
+                <fa-icon [icon]="faPlus"></fa-icon>
+                Agregar
+              </button>
+            </div>
+          </div>
+          <div formArrayName="PrvReferencias">
+            <div
+              class="row mb-3"
+              *ngFor="let quantity of referencias().controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="col-md-4 col-lg-4">
+                <div>
+                  <label for="email" class="form-label">Empresa</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="refEmpresa"
+                  />
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="let validation of validationsMessage.refEmpresa"
+                    >
+                      <div
+                        *ngIf="
+                          isvalidArray('refEmpresa', validation.type, quantity)
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-lg-3">
+                <div>
+                  <label for="email" class="form-label">Telefono/Movil</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="refTelefono"
+                  />
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="let validation of validationsMessage.refTelefono"
+                    >
+                      <div
+                        *ngIf="
+                          isvalidArray('refTelefono', validation.type, quantity)
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 col-lg-4">
+                <div>
+                  <label for="email" class="form-label">Contacto</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="refContacto"
+                  />
+                  <div class="validationErrorRed ion-text-center">
+                    <ng-container
+                      *ngFor="let validation of validationsMessage.refContacto"
+                    >
+                      <div
+                        *ngIf="
+                          isvalidArray('refContacto', validation.type, quantity)
+                        "
+                      >
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12 col-md-1">
+                <button
+                  type="button"
+                  class="btn btn-danger btndelete"
+                  (click)="removeReferencia(i)"
+                >
+                  <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="otro">
+          <div class="row mb-3">
+            <div class="col-md-5 col-lg-5">
+              <label class="form-label"
+                >Tiene usted experiencia en el sector</label
+              >
+              <div>
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="radioSi"
+                    value="true"
+                    formControlName="PrvExperienciaSector"
+                  />
+                  <label class="form-check-label labelTexto" for="radioSi"
+                    >SI</label
+                  >
+                </div>
+
+                <!-- Material inline 2 -->
+                <div class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    id="radioNo"
+                    value="false"
+                    formControlName="PrvExperienciaSector"
+                  />
+                  <label class="form-check-label labelTexto" for="radioNo"
+                    >NO</label
+                  >
+                </div>
+
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="
+                      let validation of validationsMessage.PrvExperienciaSector
+                    "
+                  >
+                    <div
+                      *ngIf="isValid('PrvExperienciaSector', validation.type)"
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+                <!--<div class="validationErrorRed ion-text-center">
+                              <ng-container
+                                *ngFor="let validation of validationsMessage.prfNombrePerfil"
+                              >
+                                <div *ngIf="isValid('prfNombrePerfil', validation.type)">
+                                  <small>{{ validation.message }}</small>
+                                </div>
+                              </ng-container>
+                            </div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="terminos">
+          <h1>Terminos</h1>
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="defaultCheck1"
+                  formControlName="PrvPoliticaTratamientoDatosPersonales"
+                />
+                <label class="form-check-label labelTexto" for="defaultCheck1">
+                  He leido y acepto la
+                  <a class="link" href=""
+                    >Politica de Tratamiento de Datos Personales</a
+                  >
+                </label>
+              </div>
+
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage.PrvPoliticaTratamientoDatosPersonales
+                  "
+                >
+                  <div
+                    *ngIf="
+                      isValid(
+                        'PrvPoliticaTratamientoDatosPersonales',
+                        validation.type
+                      )
+                    "
+                  >
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="defaultCheck2"
+                  formControlName="PrvDeclaramientoInhabilidadesInteres"
+                />
+                <label class="form-check-label labelTexto" for="defaultCheck1">
+                  He leido y suscribiré la
+                  <a class="link" href=""
+                    >Declaración de Inhabidades, incompatibilidades e
+                    Inexistencia de Conflitos de Interés y Otros</a
+                  >
+                </label>
+              </div>
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage.PrvDeclaramientoInhabilidadesInteres
+                  "
+                >
+                  <div
+                    *ngIf="
+                      isValid(
+                        'PrvDeclaramientoInhabilidadesInteres',
+                        validation.type
+                      )
+                    "
+                  >
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tab>
+
+      <tab heading="Documentos" id="tab2" class="tab" *ngIf="!varDisabledDiv">
+        <div class="container">
+          <p>
+            Para dar trámite al proceso de inscripción deberán cargarse en
+            formato PDF los documentos relacionados a continuación, los cuales
+            deberán cumplir con los requisitos exigidos para ser considerados
+            como válidos:
+          </p>
+
+          <div class="row">
+            <div
+              *ngFor="let item of listDocumentos"
+              class="col-12 col-md-6 divDocuments"
+            >
+              <div class="form-group">
+                <label class="form-label divTitleFile"
+                  >{{ item.cocNombreDocumento }}
+                  <span
+                    *ngIf="item.cocrequiered"
+                    class="form-label divRequired"
+                  >
+                    <strong
+                      ><fa-icon [icon]="faAsterisk"></fa-icon></strong></span
+                ></label>
+                <div class="input-group">
+                  <input
+                    type="file"
+                    class="form-control"
+                    [name]="item.cocNombreDocumento"
+                    [id]="item.id"
+                    placeholder=""
+                    (change)="onFileChangeRequired($event, item)"
+                    accept="application/pdf"
+                  />
+                  <button class="btn btn-outline-secondary" type="button">
+                    <fa-icon [icon]="faRedo"></fa-icon>
+                  </button>
+                </div>
+                <!-- <div>{{ item.cocNombreDocumento }}</div> -->
+                <small id="helpId" class="form-text text-muted">{{
+                  item.cocDescripcion
+                }}</small>
+                <p
+                  class="form-text text-muted"
+                  *ngIf="item.cocrequiered && item.selected === 1"
+                >
+                  Requerido
+                </p>
+                <p
+                  class="form-text text-muted"
+                  *ngIf="item.cocrequiered && action === 'edit'"
+                >
+                  La vigencia de este documento se ha vencido por favor
+                  actualizar!!!
+                </p>
+                <div *ngIf="item.cocVigencia" class="form-group">
+                  <label class="form-label"
+                    >Expedición
+                    <span
+                      *ngIf="item.cocrequiered"
+                      class="form-label divRequired"
+                    >
+                      <strong
+                        ><fa-icon [icon]="faAsterisk"></fa-icon></strong></span
+                    >:
+                  </label>
+                  <input
+                    class="form-control"
+                    type="date"
+                    [name]="item.id"
+                    [id]="item.id"
+                    (change)="vigencia($event)"
+                  />
+                </div>
+                <div style="contain: content">
+                  <a [href]="item.urlDoc">{{ item.urlDoc }} </a>
+                </div>
+              </div>
+            </div>
+            <alert type="warning">
+              <strong>ADVERTENCIA!</strong> Los documentos con
+              <span
+                ><strong class="divRequired"
+                  ><fa-icon [icon]="faAsterisk"></fa-icon></strong
+              ></span>
+              son obligatorios.
+            </alert>
+            <div class="mb-3">
+              <label for="formFileMultiple" class="form-label"
+                ><strong>Otros documentos: </strong>
+                <fa-icon [icon]="faUpload"></fa-icon
+              ></label>
+              <!-- <input class="form-control" type="file" id="formFileMultiple" multiple /> -->
+              <input
+                class="form-control"
+                type="file"
+                id="file"
+                name="file"
+                (change)="onFileChange($event)"
+                accept="application/pdf"
+              />
+            </div>
+          </div>
+          <div
+            class="divFileUploaded"
+            *ngFor="let file of filesUpload; let indexOfelement = index"
+          >
+            <div>
+              <table class="table m0 p0 mb-0">
+                <tbody>
+                  <tr>
+                    <td>
+                      <img src="assets/img/adobesvg.svg" width="27px" />
+                    </td>
+                    <td>{{ file.name }}</td>
+                    <td>{{ file.size }} Kb</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="divBtn">
+              <button (click)="deleteFileLoaded(indexOfelement)">
+                <fa-icon [icon]="faTrash" [styles]="{ color: 'red' }"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </tab>
+
+      <tab id="tab3" class="tab" *ngIf="varDisabledDiv">
+        <ng-template tabHeading>
+          Documentos
+          <fa-icon
+            [icon]="faCheck"
+            [ngClass]="{
+              iconColorTrue: readAllDocuments,
+              iconColorFalse: !readAllDocuments
+            }"
+          ></fa-icon
+        ></ng-template>
+        <div class="container">
+          <div class="row mb-3">
+            <label
+              >Para poder aprobar al proveedor se deben revisar cada uno de los
+              documentos</label
+            >
+          </div>
+          <div class="row">
+            <div
+              *ngFor="let item of prvDocumentos"
+              class="col-12 col-md-6 divDocuments"
+            >
+              <div class="form-group">
+                <label class="form-label">
+                  <span *ngIf="item.cocrequiered">
+                    <fa-icon [icon]="faAsterisk"></fa-icon
+                  ></span>
+                  {{ item.cocNombreDocumento }}
+                </label>
+                <div class="input-group">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      width: 100%;
+                      align-items: center;
+                    "
+                  >
+                    <button
+                      class="btn btn-ligth"
+                      (click)="openPdf(item)"
+                      type="button"
+                    >
+                      <fa-icon [icon]="faFilePdf" class="colorPdf"></fa-icon>
+                      {{ item.prvdOriginalNameDocument }}
+                    </button>
+                    <fa-icon
+                      [icon]="faCheck"
+                      [ngClass]="{
+                        iconColorTrue: item.prvdValidationDocument,
+                        iconColorFalse: !item.prvdValidationDocument
+                      }"
+                    ></fa-icon>
+                  </div>
+                </div>
+                <small class="form-text text-muted">{{
+                  item.cocDescripcion
+                }}</small>
+                <div *ngIf="item.cocVigencia" class="form-group">
+                  <label class="form-label">Expedición : </label>
+                  <small class="form-text text-muted">
+                    {{ item.prvdExpedicion?.split("T")[0] }}
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tab>
+
+      <tab
+        id="tab4"
+        class="tab"
+        *ngIf="varDisabledDiv"
+        (selectTab)="onSelect($event)"
+      >
+        <ng-template tabHeading>
+          Inspector
+          <fa-icon
+            [icon]="faCheck"
+            [ngClass]="{
+              iconColorTrue:
+                data.codEstadoDocumentos && data.codEstadoInspector === 2,
+              iconColorFalse: !(
+                data.codEstadoDocumentos && data.codEstadoInspector === 2
+              )
+            }"
+          ></fa-icon
+        ></ng-template>
+        <div class="container">
+          <p-accordion>
+            <p-accordionTab header="Lista Restrictivas Proveedor">
+              <p-table
+                [value]="tipoListasRestrictivas01"
+                responsiveLayout="scroll"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Identificación</th>
+                    <th>Nombre Proveedor</th>
+                    <th>Prioridad</th>
+                    <th>Lista</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-listaRestrictivas>
+                  <tr>
+                    <td>{{ listaRestrictivas.prvPlrIdentificacion }}</td>
+                    <td>{{ listaRestrictivas.prvPlrNombreProveedor }}</td>
+                    <td>{{ listaRestrictivas.prvPlrPrioridad }}</td>
+                    <td>{{ listaRestrictivas.prvPlrLista }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-accordionTab>
+
+            <p-accordionTab header="Lista Restrictivas Socio">
+              <p-table
+                [value]="tipoListasRestrictivas02"
+                responsiveLayout="scroll"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Identificación</th>
+                    <th>Nombre Proveedor</th>
+                    <th>Prioridad</th>
+                    <th>Lista</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-listaRestrictivas>
+                  <tr>
+                    <td>{{ listaRestrictivas.prvPlrIdentificacion }}</td>
+                    <td>{{ listaRestrictivas.prvPlrNombreProveedor }}</td>
+                    <td>{{ listaRestrictivas.prvPlrPrioridad }}</td>
+                    <td>{{ listaRestrictivas.prvPlrLista }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-accordionTab>
+
+            <p-accordionTab header="Lista Restrictivas Representante Legal">
+              <p-table
+                [value]="tipoListasRestrictivas03"
+                responsiveLayout="scroll"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Identificación</th>
+                    <th>Nombre Proveedor</th>
+                    <th>Prioridad</th>
+                    <th>Lista</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-listaRestrictivas>
+                  <tr>
+                    <td>{{ listaRestrictivas.prvPlrIdentificacion }}</td>
+                    <td>{{ listaRestrictivas.prvPlrNombreProveedor }}</td>
+                    <td>{{ listaRestrictivas.prvPlrPrioridad }}</td>
+                    <td>{{ listaRestrictivas.prvPlrLista }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-accordionTab>
+
+            <p-accordionTab header="Lista Restrictivas Referencia">
+              <p-table
+                [value]="tipoListasRestrictivas04"
+                responsiveLayout="scroll"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>Identificación</th>
+                    <th>Nombre Proveedor</th>
+                    <th>Prioridad</th>
+                    <th>Lista</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-listaRestrictivas>
+                  <tr>
+                    <td>{{ listaRestrictivas.prvPlrIdentificacion }}</td>
+                    <td>{{ listaRestrictivas.prvPlrNombreProveedor }}</td>
+                    <td>{{ listaRestrictivas.prvPlrPrioridad }}</td>
+                    <td>{{ listaRestrictivas.prvPlrLista }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+      </tab>
+
+      <alert
+        type="danger"
+        [dismissible]="dismissible"
+        *ngIf="alert"
+        (onClosed)="onClosed(alert)"
+      >
+        <div [innerHTML]="htmlStr"></div>
+      </alert>
+
+      <div class="row">
+        <p-progressBar [value]="progress"></p-progressBar>
+      </div>
+      <div
+        class="d-grid gap-3 d-md-flex justify-content-md-center mt-3 mb-3"
+        *ngIf="!varDisabledDiv"
+      >
+        <button type="submit" class="btn btn-block btn-success">
+          <fa-icon [icon]="faSave"></fa-icon>
+          Guardar
+        </button>
+
+        <button type="button" class="btn btn-danger" (click)="cancelar()">
+          <fa-icon [icon]="faWindowClose"></fa-icon>
+          Cancelar
+        </button>
+      </div>
+    </tabset>
+  </form>
+</div>
+
+<p-toast></p-toast>

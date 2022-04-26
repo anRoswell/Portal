@@ -1,0 +1,271 @@
+<div class="container" style="padding: 10px; margin-top: 20px">
+  <tabset>
+    <tab heading="Datos basicos" id="tab1">
+      <form [formGroup]="form" class="p-3" novalidate>
+        <fieldset>
+          <legend>
+            <h2><fa-icon [icon]="faUser"></fa-icon> {{ title }} Usuario</h2>
+          </legend>
+
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Cédula</label>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="usrCedula"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage.usrCedula"
+                >
+                  <div *ngIf="isValid('usrCedula', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="inputState" class="form-label">Empresa proceso</label>
+              <!--Using ng-option and for loop-->
+              <div class="inputGroup">
+                <ng-select
+                  [items]="empresas"
+                  [selectOnTab]="true"
+                  bindLabel="empNombreEmpresa"
+                  bindValue="id"
+                  placeholder="Seleccione empresa"
+                  [searchable]="false"
+                  formControlName="usrEmpresaProceso"
+                >
+                </ng-select>
+
+                <button class="btn btn-outline-secondary" type="button">
+                  <fa-icon [icon]="faSyncAlt"></fa-icon>
+                </button>
+              </div>
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage.usrEmpresaProceso
+                  "
+                >
+                  <div *ngIf="isValid('usrEmpresaProceso', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="usrNombres"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage.usrNombres"
+                >
+                  <div *ngIf="isValid('usrNombres', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="usrApellidos"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage.usrApellidos"
+                >
+                  <div *ngIf="isValid('usrApellidos', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="usrEmail"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage.usrEmail"
+                >
+                  <div *ngIf="isValid('usrEmail', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <!-- <div class="col-12 col-md-6">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  formControlName="usrEstado"
+                />
+                <label class="form-label" for="flexCheckDefault">
+                  Estado
+                </label>
+              </div>
+            </div> -->
+          </div>
+          <!-- <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="usrPasswordSetter"
+              />
+              <div class="ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage.usrPasswordSetter
+                  "
+                >
+                  <div
+                    class="alert alert-danger"
+                    *ngIf="isValid('usrPasswordSetter', validation.type)"
+                  >
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Confirmar password</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="confirmPassword"
+              />
+              <div
+                *ngIf="f.confirmPassword.touched && f.confirmPassword.invalid"
+                class="alert alert-danger"
+              >
+                <div *ngIf="f.confirmPassword.errors?.required">
+                  Password es requerido.
+                </div>
+                <div *ngIf="f.confirmPassword.errors?.confirmedValidator">
+                  Password y su confirmación deben coincidir!!!
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </fieldset>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+          <button class="btn btn-block btn-success" (click)="validateForm()">
+            <fa-icon [icon]="faSave"></fa-icon>
+            {{ textBtn }}
+          </button>
+
+          <button class="btn btn-danger" (click)="cancelar()">
+            <fa-icon [icon]="faWindowClose"></fa-icon>
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </tab>
+    <tab heading="Reset Password" *ngIf="isEdit">
+      <form [formGroup]="form2" class="p-3" novalidate>
+        <fieldset>
+          <legend>
+            <h2><fa-icon [icon]="faUser"></fa-icon> Cambiar contraseña</h2>
+          </legend>
+
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Contraseña antigua</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="oldPassword"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage2.oldPassword"
+                >
+                  <div *ngIf="isValid2('oldPassword', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-12 col-md-6">
+              <label for="inputState" class="form-label"
+                >Nueva contraseña</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                formControlName="usrPassword"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="let validation of validationsMessage2.usrPassword"
+                >
+                  <div *ngIf="isValid2('usrPassword', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="email" class="form-label">Repertir contraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="usrPasswordSetter"
+              />
+              <div class="validationErrorRed ion-text-center">
+                <ng-container
+                  *ngFor="
+                    let validation of validationsMessage2.usrPasswordSetter
+                  "
+                >
+                  <div *ngIf="isValid2('usrPasswordSetter', validation.type)">
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+          <button
+            class="btn btn-block btn-success"
+            (click)="validateForm2()"
+            *appRole="['Grabar']"
+          >
+            <fa-icon [icon]="faSave"></fa-icon>
+            {{ textBtn }}
+          </button>
+
+          <button class="btn btn-danger" (click)="cancelar()">
+            <fa-icon [icon]="faWindowClose"></fa-icon>
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </tab>
+  </tabset>
+</div>

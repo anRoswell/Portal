@@ -1,0 +1,107 @@
+<header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3 colorBack"
+  >
+    <div class="container">
+      <img class="navbar-brand imgLogo" [src]="logo" alt="" />
+      <a class="navbar-brand textoHeader" [routerLink]="['/']"
+        >Portal de Proveedores - {{ textoCabecera }}</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target=".navbar-collapse"
+        aria-label="Toggle navigation"
+        [attr.aria-expanded]="isExpanded"
+        (click)="toggle()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+        [ngClass]="{ show: isExpanded }"
+      >
+        <ul class="navbar-nav flex-grow">
+          <li
+            class="nav-item itemMenu"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-light" [routerLink]="['/']">Home</a>
+          </li>
+
+          <li class="nav-item drownuser" dropdown *ngFor="let menu of menus">
+            <button
+              type="button"
+              class="btn position-relative text-light"
+              dropdownToggle
+              aria-controls="dropdown-notification"
+            >
+              <fa-icon
+                [icon]="iconService.obtenerIcon(menu.menImagen)"
+              ></fa-icon>
+              {{ menu.menModuloDescripcion }}
+            </button>
+            <ul
+              id="dropdown-notification"
+              *dropdownMenu
+              class="dropdown-menu dropdown-menu-right"
+              role="menu"
+              aria-labelledby="button-basic"
+            >
+              <li role="menuitem" *ngFor="let menuitem of menu.menus">
+                <a
+                  class="dropdown-item"
+                  [routerLink]="[ (user.usrTusrCodTipoUsuario==2?'/soyproveedor/':'/dashboard/') + menuitem.menAccion]"
+                >
+                  <fa-icon
+                    [icon]="iconService.obtenerIcon(menuitem.menImagen)"
+                    [classes]="['iconClass']"
+                  ></fa-icon>
+                  {{ menuitem.menModuloDescripcion }}</a
+                >
+              </li>
+            </ul>
+          </li>
+          <app-notifications></app-notifications>
+          <li class="nav-item drownuser" dropdown>
+            <button
+              class="btn btn-outline-light btnUser"
+              id="button-basic"
+              dropdownToggle
+              type="button"
+              aria-controls="dropdown-basic"
+            >
+              <fa-icon [icon]="iconService.obtenerIcon('faUser')"></fa-icon>
+            </button>
+
+            <ul
+              id="dropdown-basic"
+              *dropdownMenu
+              class="dropdown-menu dropdown-menu-right"
+              role="menu"
+              aria-labelledby="button-basic"
+            >
+              <li role="menuitem">
+                <a
+                  button
+                  class="dropdown-item"
+                  (click)="openModalWithComponent()"
+                  ><fa-icon
+                    [icon]="iconService.obtenerIcon('faUserEdit')"
+                    [classes]="['iconClass']"
+                  ></fa-icon
+                  >Perfil</a
+                >
+              </li>
+              <li role="menuitem">
+                <button class="dropdown-item" (click)="salir()">Salir</button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,39 @@
+<li class="nav-item drownuser me-3" dropdown>
+  <button
+    type="button"
+    class="btn btn-outline-light btnUser"
+    (click)="showNotification()"
+  >
+    <fa-icon [icon]="faBell" primaryColor="white"></fa-icon>
+    <span
+      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+    >
+      {{ cantNotificaciones }}
+      <span class="visually-hidden">unread messages</span>
+    </span>
+  </button>
+</li>
+
+<p-sidebar [(visible)]="display" position="right">
+  <div>
+    <h4 style="text-align: center">
+      <fa-icon [icon]="faBell" primaryColor="white"></fa-icon> Notificaciones
+    </h4>
+  </div>
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let notification of notifications">
+        <div [ngClass]="{'disabledDiv': notification.estadoNotificacion}">
+          <button
+            class="btn btn-light"
+            (click)="updateNotification(notification.id)"
+          >          
+          <small [ngClass]="{'divNegrita': !notification.estadoNotificacion}">{{ notification.tituloNotificacion }}</small>
+          </button>
+        </div>
+      </li>    
+  </ul>
+  <div class="withoutNotifications" *ngIf="cantNotificaciones === 0">
+    <label>Sin notificaciones</label>
+    <img src="./assets/img/undraw_mailbox_re_dvds.svg" />
+  </div>
+</p-sidebar>

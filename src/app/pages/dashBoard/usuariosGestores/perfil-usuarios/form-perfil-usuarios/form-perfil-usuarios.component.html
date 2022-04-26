@@ -1,0 +1,92 @@
+<div class="contenido mb-3">
+  <h3>{{ editando ? "Editar" : "Asignar" }} Perfil a Usuario</h3>
+
+  <alert type="danger" *ngIf="validationMsg" dismissOnTimeout="5000">
+    <strong>{{ msgError }}</strong>
+  </alert>
+
+  <form [formGroup]="form" (ngSubmit)="guardar(form.value)">
+    <div class="formContenido">
+      <div class="mb-3 row">
+        <label>Usuario</label>
+
+        <ng-select
+          [items]="usuarios"
+          [selectOnTab]="true"
+          bindLabel="usrNombreCompleto"
+          bindValue="id"
+          placeholder="Seleccione usuario"
+          formControlName="pxuUsrCodUsuario"
+          [loading]="peopleLoading"
+          [searchFn]="customSearchFn2"
+        >
+        </ng-select>
+
+        <div class="validationErrorRed">
+          <ng-container
+            *ngFor="let validation of validation_messages.pxuUsrCodUsuario"
+          >
+            <div
+              *ngIf="
+                (form.get('pxuUsrCodUsuario')?.hasError(validation.type) &&
+                  form.get('pxuUsrCodUsuario')?.dirty) ||
+                (form.get('pxuUsrCodUsuario')?.touched &&
+                  form.get('pxuUsrCodUsuario')?.hasError(validation.type))
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label>Perfil</label>
+
+        <ng-select
+          [items]="perfiles"
+          [selectOnTab]="true"
+          bindLabel="prfNombrePerfil"
+          bindValue="id"
+          placeholder="Seleccione Perfil"
+          formControlName="pxuPrfCodPerfil"
+          [loading]="peopleLoading"
+          [searchFn]="customSearchFn"
+        >
+        </ng-select>
+        <div class="validationErrorRed">
+          <ng-container
+            *ngFor="let validation of validation_messages.pxuPrfCodPerfil"
+          >
+            <div
+              *ngIf="
+                (form.get('pxuPrfCodPerfil')?.hasError(validation.type) &&
+                  form.get('pxuPrfCodPerfil')?.dirty) ||
+                (form.get('pxuPrfCodPerfil')?.touched &&
+                  form.get('pxuPrfCodPerfil')?.hasError(validation.type))
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+      <button
+        type="submit"
+        class="btn btn-block btn-success"
+        *appRole="['Grabar']"
+      >
+        <fa-icon [icon]="faSave"></fa-icon>
+        {{ textBtn }}
+      </button>
+
+      <button type="button" class="btn btn-danger" (click)="cancelar()">
+        <fa-icon [icon]="faWindowClose"></fa-icon>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

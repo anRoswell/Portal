@@ -1,0 +1,54 @@
+<!--<p>This component demonstrates fetching data from the server.</p>-->
+
+<p *ngIf="!datos"><em>Loading...</em></p>
+<div class="row">
+  <div class="col-md-12 divTitulo">
+    <h2 id="tableLabel">Permisos por Empresa</h2>
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openModalWithComponent()"
+      *appRole="['Grabar']"
+    >
+      <fa-icon [icon]="faPlus"></fa-icon>
+      Nuevo
+    </button>
+  </div>
+</div>
+
+<table class="table table-striped" aria-labelledby="tableLabel" *ngIf="datos">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Empresa</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let item of datos">
+      <td>{{ item.peuUsrNombreCompleto }}</td>
+      <td ><div [innerHTML]="item.peuEmpNombreEmpresa"></div></td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="editar(item)"
+          *appRole="['Editar']"
+        >
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger btnDelete"
+          (click)="delete(item.peuUsrCodUsuario)"
+          *appRole="['BORRAR']"
+        >
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="text-center" *ngIf="datos.length == 0">Sin registro en la tabla</p>

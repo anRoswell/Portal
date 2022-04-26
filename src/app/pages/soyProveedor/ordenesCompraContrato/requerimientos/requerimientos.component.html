@@ -1,0 +1,387 @@
+<div class="container border border-secondary rounded my-4 mb-4">
+    <div class="container">
+        <form [formGroup]="form" (submit)="send()" class="form-group">
+                <div class="row my-3">
+                    <!--Input Codigo-->
+                        <div class="col-12 col-md-2">
+                            <label for="codigo" class="col-form-label">Código</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="text" id="codigo" class="form-control" formControlName="codigo" placeholder="Ej. 0001">
+                                <div class="validationErrorRed ion-text-center">
+                                    <ng-container *ngFor="let validation of validationsMessage.codigo">
+                                    <div *ngIf="isValid('codigo', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                    </div>
+                                    </ng-container>
+                                </div>
+                        </div>
+                    <!--Input Empresa-->
+                        <div class="col-12 col-md-2">
+                            <label for="nomEmpresa" class="col-form-label">Empresa</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="text" id="nomEmpresa" class="form-control" formControlName="nomEmpresa" placeholder="Ej. Urbaser Colombia" >
+                                <div class="validationErrorRed ion-text-center" >
+                                    <ng-container *ngFor="let validation of validationsMessage.nomEmpresa">
+                                        <div *ngIf="isValid('nomEmpresa', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                        </div> 
+                </div>
+                <div class="row my-3 ">
+                    <!--Input Categoria-->
+                        <div class="col-12 col-md-2">
+                        <label for="categoria" class="col-form-label">Categoría</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="text" id="categoria" class="form-control" formControlName="categoria" placeholder="Ej. Dotaciones">
+                                <div class="validationErrorRed ion-text-center" >
+                                    <ng-container *ngFor="let validation of validationsMessage.categoria">
+                                        <div *ngIf="isValid('categoria', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                        </div>
+                <!--Input Lugar de Entrega-->
+                        <div class="col-12 col-md-2">
+                            <label for="luEntrega" class="col-form-label">Lugar de Entrega</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="text" id="luEntrega" class="form-control" formControlName="luEntrega" placeholder="Ej. Facatativá" >
+                                <div class="validationErrorRed ion-text-center" >
+                                    <ng-container *ngFor="let validation of validationsMessage.luEntrega">
+                                        <div *ngIf="isValid('luEntrega', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                        </div>  
+                </div>
+                <div class="row my-3 ">
+                    <!--Input Descripción-->
+                        <div class="col-12 col-md-2">
+                        <label for="descripcion" class="col-form-label">Descripción</label>
+                        </div>
+                        <div class="col-12 col-md-10">
+                            <input type="text" id="descripcion" class="form-control" formControlName="descripcion" placeholder="Ej. Dotaciones">
+                                <div class="validationErrorRed ion-text-center" >
+                                    <ng-container *ngFor="let validation of validationsMessage.descripcion">
+                                        <div *ngIf="isValid('descripcion', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                        </div>
+                        
+                </div>
+                <div class="row my-3 ">
+                    <!--Input Cierre de Ofertas-->
+                        <div class="col-12 col-md-2">
+                        <label for="cierraOferta" class="col-form-label">Cierra Ofertas</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="datetime-local" id="start" name="cierraOferta" value="Año-Mes-Dia" class="form-control" formControlName="cierraOferta">
+                                <div class="validationErrorRed ion-text-center" >
+                                    <ng-container *ngFor="let validation of validationsMessage.cierraOferta">
+                                        <div *ngIf="isValid('cierraOferta', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                        </div>
+                <!--Input Compra Prevista -->
+                        <div class="col-12 col-md-2">
+                            <label for="compraPrevi" class="col-form-label">Compra Prevista</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="date" id="start" name="trip-start" value="Año-Mes-Dia" class="form-control" formControlName="compraPrevi">
+                            <div class="validationErrorRed ion-text-center" >
+                                <ng-container *ngFor="let validation of validationsMessage.compraPrevi">
+                                    <div *ngIf="isValid('compraPrevi', validation.type)">
+                                      <small>{{ validation.message }}</small>
+                                    </div>
+                                </ng-container>
+                            </div> 
+                        </div>
+                </div>
+                <div class="row my-3">
+                    <!--Input Fecha de Entrega-->
+                        <div class="col-12 col-md-2">
+                        <label for="fechaEntrega" class="col-form-label">Fecha Entrega</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="date" id="fechaEntrega" name="fechaEntrega" value="Año-Mes-Dia" class="form-control" formControlName="fechaEntrega">
+                                <div class="validationErrorRed ion-text-center" >
+                                    <ng-container *ngFor="let validation of validationsMessage.fechaEntrega">
+                                        <div *ngIf="isValid('fechaEntrega', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                        </div>
+                <!--Input de estado -->
+                        <div class="col-12 col-md-2">
+                            <label for="estado" class="col-form-label">Estado</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="text" id="estado"   class="form-control" formControlName="estado">
+                                <div class="validationErrorRed ion-text-center" >
+                                    <ng-container *ngFor="let validation of validationsMessage.estado">
+                                        <div *ngIf="isValid('estado', validation.type)">
+                                        <small>{{ validation.message }}</small>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                        </div>
+                </div>
+     </form>
+    </div>
+        <!--Inicia la sección de CRITERIOS DE EVALUACIÓN -->
+     <div class="container">
+       <div class="row">
+         <div class="col-12 col-md-12 mt-4">
+             <label for="contrante" class="col-form-label">CRITERIOS DE EVALUACIÓN</label>
+         </div>
+     </div>
+     <div class="container border border-secondary rounded mb-4">
+        
+         <div class="row  bg-secondary text-white">
+             <div class="col-8 col-md-10 col-lg-10">
+                 <label for="contrante" class="col-form-label ">Criterio</label>
+             </div>
+             <div class="col-4 col-md-2 col-lg-2">
+                 <label for="contrante" class="col-form-label">Respuesta</label>
+             </div>
+         </div>
+         <div class="row  my-3 ps-2 pe-2">
+             <div class="col-8 col-md-9 col-lg-10">
+                 <label  class="col-form-label">¿En la elaboración de los productos se emplean madres cabeza de hogar</label>
+               </div>
+             <div class="col-4 col-md-3 col-lg-2">
+                 <div class="form-check form-check-inline ">
+                     <input class="form-check-input" type="radio" name="elaboProdMad" id="elaboProdMadSi" value="option1">
+                     <label class="form-check-label" for="inlineRadio1">Si</label>
+                   </div>
+                   <div class="form-check form-check-inline ">
+                     <input class="form-check-input" type="radio" name="elaboProdMad" id="elaboProdMadNo" value="option2">
+                     <label class="form-check-label" for="inlineRadio2">No</label>
+                   </div>
+             </div>
+         </div>
+         <div class="row  my-3 ps-2 pe-2">
+             <div class="col-8 col-md-9 col-lg-10">
+                 <label class="col-form-label">Años de experiencia en la elaboración de estos productos</label>
+               </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                    <input type="text" id="start" name="trip-start"  class="form-control" formControlName="mesesGarantia">
+             </div>
+         </div>
+         <div class="row  my-3 ps-2 pe-2">
+             <div class="col-8 col-md-9 col-lg-10">
+                 <label class="col-form-label">Meses de Garantía adicionales otorgados</label>
+               </div>
+             <div class="col-4 col-md-3 col-lg-2">
+                
+                    <input type="text" id="start" name="trip-start"  class="form-control" formControlName="mesesGarantia">
+             </div>
+         </div>
+         <div class="row  my-3 ps-2 pe-2">
+             <div class="col-8 col-md-9 col-lg-10">
+                 <label class="col-form-label">Materiales Biodegradables</label>
+               </div>
+             <div class="col-4 col-md-3 col-lg-2">
+                 <div class="form-check form-check-inline ">
+                     <input class="form-check-input" type="radio" name="materialesBio" id="materialesBioSi" value="option1">
+                     <label class="form-check-label" for="inlineRadio1">Si</label>
+                   </div>
+                   <div class="form-check form-check-inline ">
+                     <input class="form-check-input" type="radio" name="materialesBio" id="materialesBioNo" value="option2">
+                     <label class="form-check-label" for="inlineRadio2">No</label>
+                   </div>
+             </div>
+         </div>
+ 
+     </div>
+     </div>
+        <!--Fin de los criterios de evaluación -->
+ 
+         <!--Inicio de la sección de artículos y/o servicios requeridos -->
+      <div class="container">
+     
+            <div class="row">
+                <div class="col-12 col-md-12">
+                    <label for="contrante" class="col-form-label">ARTÍCULOS Y/O SERVICIOS REQUERIDOS</label>
+                </div>
+            </div>
+      </div>
+      <div class="container">
+        <div class="table-responsive border border-secondary rounded">
+            <table class="table table-sm table-striped mb-0">
+                <thead class="bg-secondary text-white">
+                    <tr >
+                        <td  *ngFor="let articulosServicio of articulosServicios ">
+                            {{articulosServicio}}
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let datos of thead; index as i" >
+                        <td>{{i+1}}</td>
+                        <td >{{datos.descripcion}}</td>
+                        <td>{{datos.cantidad}}</td>
+                        <td>{{datos.medida}}</td>
+                        <td>{{datos.fichaTecnica}}</td>
+                        <td>{{datos.obligatorio}}</td>
+                        <td>{{datos.itemEquivalente}}</td>
+                        <td>{{datos.categoria}}</td>
+                    </tr>
+                </tbody>
+            </table> 
+       </div>
+
+     </div>    
+     
+     <!--Fin de la sección de artículos y/o servicios requeridos -->
+
+     <!--Garantías Exigidas -->
+            <div class="container  mt-4">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <label for="contrante" class="col-form-label">GARANTÍAS EXIGIDAS</label>
+                        <textarea id="comentarios" class="col-form-control w-100 p-4 border border-secondary rounded " formControlName="comentarios"></textarea>
+                    </div>
+                </div>
+            </div>
+     <!--Fin de las Garantías Exigidas -->
+
+      <!--Inicio de la sección Polizas de seguros -->
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <label for="contrante" class="col-form-label">PÓLIZAS DE SEGUROS</label>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                    <div class="table-responsive border border-secondary rounded">
+                        <table class="table table-sm table-striped mb-0">
+                            <thead class="bg-secondary text-white">
+                                <tr >
+                                    <td  *ngFor="let polizaSeguro of polizaSeguro">
+                                        {{polizaSeguro}}
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let datos of datosPolizasSeguro" >
+                                    <td >{{datos.cobertura}}</td>
+                                    <td>{{datos.termino}}</td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                </div>
+            </div>    
+        
+      <!--Fin de la Poliza de seguro -->
+
+      <!--Inicio de la sección Polizas de seguros -->
+             <div class="container mt-3">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <label for="contrante" class="col-form-label">DOCUMENTOS REQUERIDOS</label>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                    <div class="table-responsive border border-secondary rounded">
+                        <table class="table table-sm table-striped mb-0">
+                            <thead class="bg-secondary text-white">
+                                <tr >
+                                    <td  *ngFor="let documentoRequeridos of documentoRequerido ">
+                                        {{documentoRequeridos}}
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let datos of datosDocumentoRequerido" >
+                                    <td >{{datos.documentos}}</td>
+                                    <td>{{datos.vigencia}}</td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                </div>
+            </div>    
+      <!--Fin de la Poliza de seguro -->
+
+      <!--Inicio del Formulario de Observaciones -->
+                <div class="container mb-5 my-4">
+                        <div class="row my-2">
+                            <div class="col-12 col-md-12">
+                                <label for="contrante" class="col-form-label">COMENTARIOS</label>
+                            </div>
+                        </div>
+                        
+                        <div class="row my-3">
+                                <div class="col-8 col-md-8 col-lg-10 ">
+                                    <div class="row">
+                                        <div class="col-12 col-md-8 col-lg-8">
+                                            <form [formGroup]="formObervaciones" class="form-group">
+                                                <textarea id="comentarios" class="col-form-control w-100 p-2 border border-secondary rounded " formControlName="comentarios"></textarea>
+                                            </form> 
+                                        </div>
+                                         <div class="col-12 col-md-4 col-lg-4">
+                                                <button type="submit" class="btn btn-success ">publicación</button>
+                                         </div>
+                                    </div>
+                                  
+                                </div>
+                         
+                                <div class="col-4 col-md-4 col-lg-2">
+                                    <div class="container">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary ">Participar</button>
+                                        </div>
+                                    </div>
+                                </div>  
+                          
+                        </div> 
+
+                        <div class="row">
+                            <div class="row my-2">
+                                <div class="col-12 col-md-12">
+                                    <label for="contrante" class="col-form-label">HISTORIAL DE COMENTARIOS</label>
+                                </div>
+                            </div>
+                            <div class="container ">
+                                <div class="table-responsive border border-secondary rounded">
+                                    <table class="table table-sm table-striped mb-0">
+                                        <thead class="bg-secondary text-white">
+                                            <tr >
+                                                <td  *ngFor="let listaComentarios of listadoComentarios ">
+                                                    {{listaComentarios}}
+                                                </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let datos of datosListadoComen" >
+                                                <td >{{datos.fechaCreacion}}</td>
+                                                <td>{{datos.persCreo}}</td>
+                                                <td>{{datos.observacion}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table> 
+                            </div>
+                        </div>    
+                        </div>
+                                            
+               </div>               
+     </div>
+      <!-- Fin del Formulario de Observaciones-->
+                
+     
+ 
+ 

@@ -1,0 +1,83 @@
+<img class="open-button" [src]="iconomensaje" alt="" (click)="mostrar()" />
+<p-sidebar [(visible)]="display" position="right">
+  <p-tabView>
+    <p-tabPanel header="Formulario">
+      <form action="/action_page.php" class="form-container">
+        <div class="headTitle">
+          <label for="msg"><b>Mensajes</b></label>
+        </div>
+
+        <div class="center">
+          <ngx-file-drop
+            dropZoneLabel="Arrastre archivos aqui"
+            (onFileDrop)="dropped($event)"
+            (onFileOver)="fileOver($event)"
+            (onFileLeave)="fileLeave($event)"
+          >
+            <ng-template
+              ngx-file-drop-content-tmp
+              let-openFileSelector="openFileSelector"
+            >
+              ¡Arrastre archivo!!!
+              <!--<button type="button" (click)="openFileSelector()">
+            Browse Files
+          </button> -->
+            </ng-template>
+          </ngx-file-drop>
+          <div class="upload-table">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Archivo</th>
+                </tr>
+              </thead>
+              <tbody class="upload-name-style">
+                <tr *ngFor="let item of files; let i = index">
+                  <td>
+                    <small>{{ item.relativePath }}</small>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="divForm">
+          <form [formGroup]="form">
+            <label for="msg"><b>Mensaje</b></label>
+            <textarea
+              placeholder="Escribir mensaje..."
+              name="msg"
+              required
+              formControlName="rqaComentario"
+            ></textarea>
+
+            <button type="submit" class="btn" (click)="validateForm()">
+              Enviar
+            </button>
+            <!-- <button type="button" class="btn cancel" (click)="closeForm()">
+          Cerrar
+        </button> -->
+          </form>
+        </div>
+      </form>
+    </p-tabPanel>
+    <p-tabPanel header="Historico">
+      <label for="msg"><b>Historico</b></label>
+      <div style="overflow: scroll; height: 200px" class="divHistorico">
+        <div>texto 1</div>
+        <div>texto 2</div>
+        <div>texto 3</div>
+        <div>texto 4</div>
+        <div>texto 5</div>
+        <div>texto 6</div>
+        <div>texto 7</div>
+        <div>texto 8</div>
+        <div>texto 9</div>
+        <div>texto 10</div>
+        <div>texto 11</div>
+        <div>texto 12</div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+</p-sidebar>

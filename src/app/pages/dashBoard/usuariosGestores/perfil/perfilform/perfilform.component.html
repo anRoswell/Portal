@@ -1,0 +1,52 @@
+<div class="contenido mb-3">
+  <h2>{{ title }} Perfil</h2>
+  <alert type="danger" *ngIf="validationMsg" dismissOnTimeout="5000">
+    <strong>{{ msgError }}</strong>
+  </alert>
+
+  <form [formGroup]="form">
+    <div class="formContenido mb3">
+      <div class="row mb-3">
+        <label for="email" class="form-label">Perfil</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="prfNombrePerfil"
+        />
+        <div class="validationErrorRed ion-text-center">
+          <ng-container
+            *ngFor="let validation of validationsMessage.prfNombrePerfil"
+          >
+            <div *ngIf="isValid('prfNombrePerfil', validation.type)">
+              <small>{{ validation.message }}</small>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          formControlName="prfEstado"
+        />
+        <label class="form-check-label" for="flexCheckDefault"> Estado </label>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+      <button
+        class="btn btn-block btn-success"
+        (click)="validateForm()"
+        *appRole="['grabar', 'editar']"
+      >
+        <fa-icon [icon]="faSave"></fa-icon>
+        {{ textBtn }}
+      </button>
+
+      <button class="btn btn-danger" (click)="closeModal()">
+        <fa-icon [icon]="faWindowClose"></fa-icon>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

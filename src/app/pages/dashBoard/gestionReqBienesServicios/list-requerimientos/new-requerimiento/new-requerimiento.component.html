@@ -1,0 +1,566 @@
+<div class="container">
+  <h3 class="mt-3">REQUERIMIENTOS</h3>
+  <form
+    class="g-3 needs-validation"
+    novalidate
+    [formGroup]="form"
+    (submit)="send()"
+    class="form-group"
+  >
+    <div class="datosPersonales">
+      <h1>Datos del Proveedor</h1>
+      <div class="row mb-3">
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom01" class="form-label">Empresa</label>
+          <select
+            class="form-select"
+            id="validationCustom04"
+            required
+            formControlName="empresa"
+          >
+            <option selected disabled value="">
+              Seleccione una empresa...
+            </option>
+            <option value="1">a</option>
+            <option value="2">b</option>
+            <option value="3">c</option>
+          </select>
+          <div class="valid-feedback">Looks good!</div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <label for="validationCustom05" class="form-label"
+            >Descripción general del requerimiento</label
+          >
+          <angular-editor
+            [config]="editorConfig"
+            formControlName="descripcionGnral"
+          ></angular-editor>
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.descripcionGnral"
+            >
+              <div *ngIf="isValid('descripcionGnral', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please provide a valid zip.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="datosPersonales">
+      <h1>Artículos o servicios solicitados</h1>
+      <div class="row mb-3">
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom04" class="form-label"
+            >Número de Ítem</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="numItem"
+            aria-describedby="inputGroupPrepend"
+            formControlName="numItem"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container *ngFor="let validation of validationsMessage.numItem">
+              <div *ngIf="isValid('numItem', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom04" class="form-label"
+            >Cantidad Requerida</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            id="cantRequerida"
+            aria-describedby="inputGroupPrepend"
+            formControlName="cantRequerida"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.cantRequerida"
+            >
+              <div *ngIf="isValid('cantRequerida', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom04" class="form-label"
+            >Unidad de Medida</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="UnidadDeMedida"
+            aria-describedby="inputGroupPrepend"
+            formControlName="unidMedida"
+            quired
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.unidMedida"
+            >
+              <div *ngIf="isValid('unidMedida', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Unidad de Medida.</div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom04" class="form-label"
+            >Ítem equivalente</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="ItemEquivalente"
+            aria-describedby="ItemEquivalente"
+            formControlName="itemEquivalente"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.itemEquivalente"
+            >
+              <div *ngIf="isValid('itemEquivalente', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Ítem equivalente.</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="validationCustom04" class="form-label"
+            >Descripción del artículo o servicio</label
+          >
+          <angular-editor
+            [config]="editorConfig"
+            formControlName="descripServicio"
+          ></angular-editor>
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.descripServicio"
+            >
+              <div *ngIf="isValid('descripServicio', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="validationCustom04" class="form-label"
+            >Ficha Técnica</label
+          >
+          <input
+            type="file"
+            class="form-control"
+            id="FichaTecnica"
+            aria-describedby="inputGroupPrepend"
+            formControlName="fichaTecnica"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.fichaTecnica"
+            >
+              <div *ngIf="isValid('fichaTecnica', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Ficha Técnica.</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="validationCustom04" class="form-label"
+            >Categoría del producto o servicio</label
+          >
+          <select
+            class="form-select"
+            id="validationCustom04"
+            required
+            formControlName="categoriaPro"
+          >
+            <option selected disabled value="">
+              Seleccione una categoría...
+            </option>
+            <option value="1">a</option>
+            <option value="2">b</option>
+            <option value="3">c</option>
+          </select>
+          <div class="invalid-feedback">Categoría del producto o servicio.</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+              formControlName="descripServicio"
+            />
+            <label class="form-check-label" for="flexCheckDefault">
+              Obligatorio
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="datosPersonales">
+      <h1>Otros</h1>
+      <div class="row mb-3">
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustomUsername" class="form-label"
+            >Lugar de entrega</label
+          >
+          <div class="input-group has-validation">
+            <span class="input-group-text" id="inputGroupPrepend">@</span>
+            <input
+              type="text"
+              class="form-control"
+              id="LugarDeentrega"
+              aria-describedby="inputGroupPrepend"
+              formControlName="lugarEntrega"
+              required
+            />
+            <div class="validationErrorRed ion-text-center">
+              <ng-container
+                *ngFor="let validation of validationsMessage.lugarEntrega"
+              >
+                <div *ngIf="isValid('lugarEntrega', validation.type)">
+                  <small>{{ validation.message }}</small>
+                </div>
+              </ng-container>
+            </div>
+            <div class="invalid-feedback">Please choose a username.</div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom04" class="form-label"
+            >Fecha y hora Cierre Ofertas</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="fechaCierreOferta"
+            aria-describedby="inputGroupPrepend"
+            formControlName="fechaCierreOferta"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.fechaCierreOferta"
+            >
+              <div *ngIf="isValid('fechaCierreOferta', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom04" class="form-label"
+            >Fecha de compra prevista</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="LugarDeentrega"
+            aria-describedby="inputGroupPrepend"
+            formControlName="fechaCompraPrevista"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.fechaCompraPrevista"
+            >
+              <div *ngIf="isValid('fechaCompraPrevista', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6">
+          <label for="validationCustom04" class="form-label"
+            >Fecha de entrega esperada</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            id="FechaDeEntregaEsperada"
+            aria-describedby="inputGroupPrepend"
+            formControlName="fechaEntregaEsperada"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.fechaEntregaEsperada"
+            >
+              <div *ngIf="isValid('fechaEntregaEsperada', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="datosPersonales">
+      <h1>Criterios de evaluación</h1>
+      <div class="row mb-3"></div>
+    </div>
+
+    <div class="datosPersonales">
+      <h1>Garantías exigidas</h1>
+      <div class="row mb-3">
+        <div class="col-12">
+          <angular-editor
+            [config]="editorConfig"
+            formControlName="garantiasExigidas"
+          ></angular-editor>
+
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.garantiasExigidas"
+            >
+              <div *ngIf="isValid('garantiasExigidas', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="datosPersonales">
+      <h1>Pólizas de seguro exigidas</h1>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="validationCustom04" class="form-label"
+            >Riesgo amparado</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="riesgoAmparado"
+            aria-describedby="inputGroupPrepend"
+            required
+            formControlName="riesgoAmp"
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.riesgoAmp"
+            >
+              <div *ngIf="isValid('riesgoAmp', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+        <div class="col-md-4">
+          <label for="validationCustom04" class="form-label">Cuantía</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cuantia"
+            aria-describedby="inputGroupPrepend"
+            required
+            formControlName="cuantia"
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container *ngFor="let validation of validationsMessage.cuantia">
+              <div *ngIf="isValid('cuantia', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+        <div class="col-md-4">
+          <label for="validationCustom04" class="form-label">Vigencia</label>
+          <input
+            type="number"
+            class="form-control"
+            id="vigencia"
+            aria-describedby="inputGroupPrepend"
+            formControlName="vigencia"
+            required
+          />
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.vigencia"
+            >
+              <div *ngIf="isValid('vigencia', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+        <div class="col-12">
+          <label for="validationCustom04" class="form-label"
+            >Observaciones</label
+          >
+          <angular-editor
+            [config]="editorConfig"
+            formControlName="observacionesPolizas"
+          ></angular-editor>
+          <div class="validationErrorRed ion-text-center">
+            <ng-container
+              *ngFor="let validation of validationsMessage.observacionesPolizas"
+            >
+              <div *ngIf="isValid('observacionesPolizas', validation.type)">
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+          <div class="invalid-feedback">Please select a valid state.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="datosPersonales">
+      <h1>Otros Documentos</h1>
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <button type="button" class="btn btn-success" (click)="addSocio()">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            Agregar
+          </button>
+        </div>
+      </div>
+      <div>
+        <div formArrayName="otrosDocumentos">
+          <div
+            class="row"
+            *ngFor="let quantity of otrosDocumentos().controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div class="col-6 col-md-6 col-lg-6">
+              <div>
+                <label for="documento" class="form-label"
+                  >Nombre del documento</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="documento"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.documento"
+                  >
+                    <div
+                      *ngIf="
+                        isvalidArray('documento', validation.type, quantity)
+                      "
+                    >
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-2 col-lg-2">
+              <div>
+                <label for="vigencia" class="form-label">Vigencia</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="vigencia"
+                />
+                <div class="validationErrorRed ion-text-center">
+                  <ng-container
+                    *ngFor="let validation of validationsMessage.vigencia"
+                  >
+                    <div *ngIf="isValid('vigencia', validation.type)">
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3 col-lg-3">
+              <div>
+                <div class="form-check form-check-inline check-pr">
+                  <div class="container">
+                    <label for="vigencia" class="form-check-label"
+                      >Obligatorio</label
+                    >
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="obligatorio"
+                    />
+                    <div class="validationErrorRed ion-text-center">
+                      <ng-container
+                        *ngFor="
+                          let validation of validationsMessage.obligatorio
+                        "
+                      >
+                        <div *ngIf="isValid('obligatorio', validation.type)">
+                          <small>{{ validation.message }}</small>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-1 col-lg-1">
+              <button
+                type="button"
+                class="btn btn-danger btndelete backspace-fill"
+                (click)="removeDocumento(i)"
+              >
+                Hola <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" (click)="save()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

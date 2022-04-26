@@ -1,0 +1,93 @@
+<div class="contenido mb-3">
+  <h3>{{ editando ? "Editar" : "Asignar" }} Empresa a Usuario</h3>
+
+  <alert type="danger" *ngIf="validationMsg" dismissOnTimeout="5000">
+    <strong>{{ msgError }}</strong>
+  </alert>
+
+  <form [formGroup]="form" (ngSubmit)="guardar(form.value)">
+    <div class="formContenido">
+      <div class="mb-3 row">
+        <label>Usuario</label>
+
+        <ng-select
+          [items]="usuarios"
+          [selectOnTab]="true"
+          bindLabel="usrNombreCompleto"
+          bindValue="id"
+          placeholder="Seleccione usuario"
+          formControlName="peuUsrCodUsuario"
+          [loading]="peopleLoading"
+          [searchFn]="customSearchFn2"
+        >
+        </ng-select>
+
+        <div class="validationErrorRed">
+          <ng-container
+            *ngFor="let validation of validation_messages.peuUsrCodUsuario"
+          >
+            <div
+              *ngIf="
+                (form.get('peuUsrCodUsuario')?.hasError(validation.type) &&
+                  form.get('peuUsrCodUsuario')?.dirty) ||
+                (form.get('peuUsrCodUsuario')?.touched &&
+                  form.get('peuUsrCodUsuario')?.hasError(validation.type))
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label>Empresa</label>
+
+        <ng-select
+          [items]="empresas"
+          [selectOnTab]="true"
+          bindLabel="empNombreEmpresa"
+          bindValue="id"
+          placeholder="Seleccione Empresa"
+          formControlName="peuEmpCodEmpresa"
+          [loading]="peopleLoading"
+          [searchFn]="customSearchFn"
+          [multiple]="true"
+        >
+        </ng-select>
+        <div class="validationErrorRed">
+          <ng-container
+            *ngFor="let validation of validation_messages.peuEmpCodEmpresa"
+          >
+            <div
+              *ngIf="
+                (form.get('peuEmpCodEmpresa')?.hasError(validation.type) &&
+                  form.get('peuEmpCodEmpresa')?.dirty) ||
+                (form.get('peuEmpCodEmpresa')?.touched &&
+                  form.get('peuEmpCodEmpresa')?.hasError(validation.type))
+              "
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+      <button
+        type="submit"
+        class="btn btn-block btn-success"
+       
+      >
+        <fa-icon [icon]="faSave"></fa-icon>
+        {{ textBtn }}
+      </button>
+
+      <button type="button" class="btn btn-danger" (click)="cancelar()">
+        <fa-icon [icon]="faWindowClose"></fa-icon>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

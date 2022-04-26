@@ -1,0 +1,28 @@
+.contenido {
+  width: 100%;
+  padding: 10px;
+}
+.flexRow {
+  display: flex;
+  justify-content: space-between;
+  .flexRowItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    input {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+.formContenido {
+  border: 1px solid rgb(192, 192, 192);
+  display: block;
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 10px;
+}
+label {
+  font-weight: 600;
+}

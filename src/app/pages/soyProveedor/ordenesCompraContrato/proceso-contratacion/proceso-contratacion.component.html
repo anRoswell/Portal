@@ -1,0 +1,1180 @@
+
+<div class="container border border-secondary rounded my-4 ">
+    <form [formGroup]="form" (submit)="send()" class="form-group">
+      <div >
+        <label  class="col-form-label ">Proceso de contratación</label>
+    </div>
+        <!--Datos del Contratante-->
+        
+        <div class="border border-secondary rounded mt-2 mb-4 " >
+            <div class=" p-3 mb-2 bg-secondary text-white float-right" id="subcontenedor">
+                <div class="m-0 ">
+                    <label  class="col-form-label float-right">DATOS DEL CONTRATANTE</label>
+                </div>
+            </div>
+            
+            
+            <div class="row my-3 ps-2 pe-2">
+              <!--Input Contratante-->
+                  <div class="col-12 col-md-2">
+                    <label for="contratante" class="col-form-label">Contratante</label>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <input type="text" id="contratante" class="form-control" formControlName="contratante">
+                    <div class="validationErrorRed ion-text-center">
+
+                      <ng-container
+                        *ngFor="
+      
+                          let validation of validationsMessage.contratante
+      
+                        "
+      
+                      >
+      
+                        <div *ngIf="isValid('contratante', validation.type)">
+      
+                          <small>{{ validation.message }}</small>
+                        </div>
+                      </ng-container>
+                    </div>
+                  </div>
+            <!--Input CC  Representante-->
+                  <div class="col-12 col-md-2">
+                      <label for="nitcontratante" class="col-form-label">Nit contratante</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <input type="text" id="nitcontratante" class="form-control" formControlName="nitcontratante" >
+                      <div class="validationErrorRed ion-text-center">
+
+                        <ng-container
+                          *ngFor="
+        
+                            let validation of validationsMessage.nitcontratante
+        
+                          "
+        
+                        >
+        
+                          <div *ngIf="isValid('nitcontratante', validation.type)">
+        
+                            <small>{{ validation.message }}</small>
+                          </div>
+                        </ng-container>
+                      </div>
+                   </div>
+          </div>
+            <div class="row my-3 ps-2 pe-2">
+                <!--Input Representante legal-->
+                    <div class="col-12 col-md-2">
+                      <label for="representante_legal" class="col-form-label">Representante Legal</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <input type="text" id="representante_legal" class="form-control" formControlName="representante_legal">
+                      <div class="validationErrorRed ion-text-center">
+
+                        <ng-container
+                          *ngFor="
+        
+                            let validation of validationsMessage.representante_legal
+        
+                          "
+        
+                        >
+        
+                          <div *ngIf="isValid('representante_legal', validation.type)">
+        
+                            <small>{{ validation.message }}</small>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+              <!--Input CC  Representante-->
+                    <div class="col-12 col-md-2">
+                        <label for="cc_representante" class="col-form-label">CC Representante</label>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <input type="text" id="cc_representante" class="form-control" formControlName="cc_representante" >
+                        <div class="validationErrorRed ion-text-center">
+
+                          <ng-container
+                            *ngFor="
+          
+                              let validation of validationsMessage.cc_representante
+          
+                            "
+          
+                          >
+          
+                            <div *ngIf="isValid('cc_representante', validation.type)">
+          
+                              <small>{{ validation.message }}</small>
+                            </div>
+                          </ng-container>
+                        </div>
+                     </div>
+            </div>
+                <div class="row my-3 ps-2 pe-2">
+                   <!--Input Dirección de Notificación-->
+                    <div class="col-12 col-md-2">
+                      <label for="direcio_noti" class="col-form-label">Dirección de Notificación</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <input type="text" id="direcio_noti" class="form-control"  formControlName="direcio_noti">
+                      <div class="validationErrorRed ion-text-center">
+
+                        <ng-container
+                          *ngFor="
+        
+                            let validation of validationsMessage.direcio_noti
+        
+                          "
+        
+                        >
+        
+                          <div *ngIf="isValid('direcio_noti', validation.type)">
+        
+                            <small>{{ validation.message }}</small>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <!--Input Telefono Datos del contratante-->
+                    <div class="col-12 col-md-2 ">
+                        <label for="telefono" class="col-form-label">telefono</label>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <input type="number" id="telefono" class="form-control"  formControlName="telefono">
+                        <div class="validationErrorRed ion-text-center">
+
+                          <ng-container
+                            *ngFor="
+          
+                              let validation of validationsMessage.telefono
+          
+                            "
+          
+                          >
+          
+                            <div *ngIf="isValid('telefono', validation.type)">
+          
+                              <small>{{ validation.message }}</small>
+                            </div>
+                          </ng-container>
+                        </div>
+                     </div>
+                </div> 
+                <div class="row my-3 ps-2 pe-2">
+                  <!--Input Gestor del Contrato-->
+                    <div class="col-12 col-md-2">
+                      <label for="gestor_contrato" class="col-form-label">Gestor del Contrato</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                      <input type="text" id="gestor_contrato" class="form-control" formControlName="gestor_contrato" >
+                      <div class="validationErrorRed ion-text-center">
+
+                        <ng-container
+                          *ngFor="
+        
+                            let validation of validationsMessage.gestor_contrato
+        
+                          "
+        
+                        >
+        
+                          <div *ngIf="isValid('gestor_contrato', validation.type)">
+        
+                            <small>{{ validation.message }}</small>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-2">
+                      <!--Input Email Gestor-->
+                        <label for="email_gestor" class="col-form-label">Email Gestor</label>
+                      </div>
+                      <div class="col-12 col-md-4">
+                        <input type="text" id="email_gestor" class="form-control" formControlName="email_gestor">
+                        <div class="validationErrorRed ion-text-center">
+
+                          <ng-container
+                            *ngFor="
+          
+                              let validation of validationsMessage.email_gestor
+          
+                            "
+          
+                          >
+          
+                            <div *ngIf="isValid('email_gestor', validation.type)">
+          
+                              <small>{{ validation.message }}</small>
+                            </div>
+                          </ng-container>
+                        </div>
+                     </div>
+                </div>
+                <div class="row my-3 ps-2 pe-2">
+                    <div class="col-12 col-md-2">
+                      <!--Input Coordinador del contrato-->
+                      <label for="coor_contrato" class="col-form-label">Coordinador del Contrato</label>
+                    </div>
+                    <div class=" col-12 col-md-4">
+                      <input type="text" id="coor_contrato" class="form-control" formControlName="coor_contrato">
+                      <div class="validationErrorRed ion-text-center">
+
+                        <ng-container
+                          *ngFor="
+        
+                            let validation of validationsMessage.coor_contrato
+        
+                          "
+        
+                        >
+        
+                          <div *ngIf="isValid('coor_contrato', validation.type)">
+        
+                            <small>{{ validation.message }}</small>
+                          </div>
+                        </ng-container>
+                      </div>
+                    </div>
+                    <!--Input Email Coordinador-->
+                    <div class="col-12 col-md-2">
+                        <label for="email_coor" class="col-form-label">Email Coordinador</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <input type="email" id="email_coor" class="form-control" formControlName="email_coor">
+                        <div class="validationErrorRed ion-text-center">
+
+                          <ng-container
+                            *ngFor="
+          
+                              let validation of validationsMessage.email_coor
+          
+                            "
+          
+                          >
+          
+                            <div *ngIf="isValid('email_coor', validation.type)">
+          
+                              <small>{{ validation.message }}</small>
+                            </div>
+                          </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--Fin de los datos del contratante-->
+
+        <!-- Datos del contratista-->
+        
+    <div class="border border-secondary rounded mt-2 mb-4">
+        <div class=" p-3 mb-2 bg-secondary text-white" id="subcontenedor">
+            <div class="m-0 ">
+                <label  class="col-form-label ">DATOS DEL CONTRATISTA</label>
+            </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input contratista-->
+            <div class="col-12 col-md-2">
+              <label for="contratista" class="col-form-label">Contratista</label>
+            </div>
+            <div class="col-12 col-md-4">
+              <input type="text" id="contratista" class="form-control" formControlName="contratista">
+              <div class="validationErrorRed ion-text-center">
+
+                <ng-container
+                  *ngFor="
+
+                    let validation of validationsMessage.contratista
+
+                  "
+
+                >
+
+                  <div *ngIf="isValid('contratista', validation.type)">
+
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <!--Input Nit Contratante-->
+            <div class="col-12 col-md-2">
+                <label for="nitcontrante" class="col-form-label">Nit Contratante</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <input type="text" id="nitcontrante" class="form-control" formControlName="nitcontrante">
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.nitcontrante
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('nitcontrante', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+             </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Representante Legal-->
+                <div class="col-12 col-md-2">
+                  <label for="representante_legal_cont" class="col-form-label">Representante Legal</label>
+                </div>
+                <div class="col-12 col-md-4">
+                  <input type="text" id="representante_legal_cont" class="form-control" formControlName="representante_legal_cont">
+                  <div class="validationErrorRed ion-text-center">
+
+                    <ng-container
+                      *ngFor="
+    
+                        let validation of validationsMessage.representante_legal_cont
+    
+                      "
+    
+                    >
+    
+                      <div *ngIf="isValid('representante_legal_cont', validation.type)">
+    
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <!--Input Representante-->
+                <div class=" col-12 col-md-2 ">
+                    <label for="cc_representante_cont" class="col-form-label">CC Representante</label>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <input type="text" id="cc_representante_cont" class="form-control" formControlName="cc_representante_cont">
+                    <div class="validationErrorRed ion-text-center">
+
+                      <ng-container
+                        *ngFor="
+      
+                          let validation of validationsMessage.cc_representante_cont
+      
+                        "
+      
+                      >
+      
+                        <div *ngIf="isValid('cc_representante_cont', validation.type)">
+      
+                          <small>{{ validation.message }}</small>
+                        </div>
+                      </ng-container>
+                    </div>
+                 </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Direcciòn de Notificación del contratista-->
+                <div class="col-12 col-md-2">
+                  <label for="dir_notificacion" class="col-form-label">Dirección de Notificación</label>
+                </div>
+                <div class="col-12 col-md-4">
+                  <input type="text" id="dir_notificacion" class="form-control" formControlName="dir_notificacion" >
+                  <div class="validationErrorRed ion-text-center">
+
+                    <ng-container
+                      *ngFor="
+    
+                        let validation of validationsMessage.dir_notificacion
+    
+                      "
+    
+                    >
+    
+                      <div *ngIf="isValid('dir_notificacion', validation.type)">
+    
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <!--Input telefono del contratista-->
+                <div class="col-12 col-md-2">
+                    <label for="telefono_cont" class="col-form-label">Teléfono</label>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <input type="text" id="telefono_cont" class="form-control" formControlName="telefono_cont">
+                    <div class="validationErrorRed ion-text-center">
+
+                      <ng-container
+                        *ngFor="
+      
+                          let validation of validationsMessage.telefono_cont
+      
+                        "
+      
+                      >
+      
+                        <div *ngIf="isValid('telefono_cont', validation.type)">
+      
+                          <small>{{ validation.message }}</small>
+                        </div>
+                      </ng-container>
+                    </div>
+                 </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input contacto del contratista-->
+                <div class="col-12 col-md-2">
+                  <label for="contacto" class="col-form-label">Contacto</label>
+                </div>
+                <div class="col-12 col-md-4">
+                  <input type="text" id="contacto" class="form-control" formControlName="contacto">
+                  <div class="validationErrorRed ion-text-center">
+
+                    <ng-container
+                      *ngFor="
+    
+                        let validation of validationsMessage.contacto
+    
+                      "
+    
+                    >
+    
+                      <div *ngIf="isValid('contacto', validation.type)">
+    
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                <!--Input  Email contacto del contratista-->
+                <div class="col-12 col-md-2">
+                    <label for="email_cont" class="col-form-label">Email Contacto</label>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <input type="text" id="email_cont" class="form-control" formControlName="email_cont">
+                    <div class="validationErrorRed ion-text-center">
+
+                      <ng-container
+                        *ngFor="
+      
+                          let validation of validationsMessage.email_cont
+      
+                        "
+      
+                      >
+      
+                        <div *ngIf="isValid('email_cont', validation.type)">
+      
+                          <small>{{ validation.message }}</small>
+                        </div>
+                      </ng-container>
+                    </div>
+                </div>
+        </div>
+       </div>
+        
+       <!--Fin de los datos del Contratante -->
+       <!--Información del Contrato-->
+
+       <div class="contenedor border border-secondary rounded mt-4 mb-4">
+        <div class=" p-3 mb-2 bg-secondary text-white" id="subcontenedor">
+            <div class="m-0 ">
+                <label  class="col-form-label ">INFORMACIÓN DEL CONTRATO</label>
+            </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Unidad de negocio-->
+            <div class="col-12 col-md-2">
+                <label for="unid_negocio" class="col-form-label">Unidad de Negocio</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <input type="text" id="unid_negocio" class="form-control" formControlName="unid_negocio">
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.unid_negocio
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('unid_negocio', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <!--Input Clase de contrato-->
+              <div class="col-12 col-md-2">
+                  <label for="clas_cont" class="col-form-label">Clase de Contrato</label>
+                </div>
+                <div class="col-12 col-md-4">
+                  <input type="text" id="clas_cont" class="form-control" formControlName="clas_cont">
+                  <div class="validationErrorRed ion-text-center">
+
+                    <ng-container
+                      *ngFor="
+    
+                        let validation of validationsMessage.clas_cont
+    
+                      "
+    
+                    >
+    
+                      <div *ngIf="isValid('clas_cont', validation.type)">
+    
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+              </div>
+            </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Unidad de negocio-->
+            <div class="col-12 col-md-2">
+                <label for="obj_contrato" class="col-form-label">Objeto del contrato</label>
+              </div>
+              <div class="col-12 col-md-10">
+                <textarea id="obj_contrato" class="form-control" formControlName="obj_contrato"></textarea>
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.obj_contrato
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('obj_contrato', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+                
+              </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Obligaciones especificas-->
+            <div class="col-12 col-md-2">
+                <label for="obligaciones_esp" class="col-form-label">Obligaciones Especificas</label>
+              </div>
+              <div class="col-12 col-md-10">
+                <textarea id="obligaciones_esp" class="form-control" formControlName="obligaciones_esp"></textarea>
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.obligaciones_esp
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('obligaciones_esp', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Duración del contrato-->
+            <div class="col-12 col-md-2">
+                <label for="duracion_cont" class="col-form-label">Duración del contrato</label>
+              </div>
+              <div class="col-12 col-md-2">
+                <input type="number" id="meses" class="form-control" placeholder="# Meses" class="form-control-plaintext" formControlName="meses">
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.meses
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('meses', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="col-12 col-md-2">
+                <select class="form-select" aria-label="Default select example"  formControlName="dias" placeholder="Días" value="Dias">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="6">5</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                </select>
+              </div>
+         
+              <div class="col-12 col-md-2">
+                <!--Input Vigencia-->
+                  <label for="vigencia" class="col-form-label">Vigencia</label>
+                </div>
+                <div class="col-12 col-md-2">
+                  <input type="date" id="start" name="trip-start" value="Año-Mes-Dia" class="form-control" formControlName="fecha_inicio">
+                  <div class="validationErrorRed ion-text-center">
+
+                    <ng-container
+                      *ngFor="
+    
+                        let validation of validationsMessage.fecha_inicio
+    
+                      "
+    
+                    >
+    
+                      <div *ngIf="isValid('fecha_inicio', validation.type)">
+    
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+                 
+              </div>
+              <div class="col-12 col-md-2">
+
+                <input type="date" id="start" name="trip-start" value="Año-Mes-Dia" class="form-control" formControlName="fecha_fin">
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.fecha_fin
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('fecha_fin', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Valor del contrato-->
+            <div class="col-12 col-md-2">
+                <label for="valor_cont" class="col-form-label">Valor del Contrato</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <input type="text" id="valor_cont" class="form-control" formControlName="valor_cont">
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.valor_cont
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('valor_cont', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              <!--Input Forma de pago-->
+              <div class="col-12 col-md-2">
+                  <label for="forma_pago" class="col-form-label">Forma de Pago</label>
+                </div>
+                <div class="col-12 col-md-4">
+                  <input type="text" id="forma_pago" class="form-control" formControlName="forma_pago">
+                  <div class="validationErrorRed ion-text-center">
+
+                    <ng-container
+                      *ngFor="
+    
+                        let validation of validationsMessage.forma_pago
+    
+                      "
+    
+                    >
+    
+                      <div *ngIf="isValid('forma_pago', validation.type)">
+    
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+              </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input ¿Pregunta?-->
+            <div class="col-12 col-md-4">
+                <label for="ingreso_personal" class="col-form-label">¿La ejecución requiere ingreso de personal del contratista a nuestras instalaciones?</label>
+              </div>
+              <div class="col-12 col-md-1">
+                <input type="text" id="ingreso_personal" class="form-control" formControlName="ingreso_personal">
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.ingreso_personal
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('ingreso_personal', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+               <!--Input Forma de pago-->
+              <div class="col-12 col-md-2">
+                  <label for="prorroga_aut" class="col-form-label">¿Se contará con prórroga automática?</label>
+                </div>
+                <div class="col-12 col-md-1">
+                  <input type="text" id="prorroga_aut" class="form-control" formControlName="prorroga_aut">
+                  <div class="validationErrorRed ion-text-center">
+
+                    <ng-container
+                      *ngFor="
+    
+                        let validation of validationsMessage.prorroga_aut
+    
+                      "
+    
+                    >
+    
+                      <div *ngIf="isValid('prorroga_aut', validation.type)">
+    
+                        <small>{{ validation.message }}</small>
+                      </div>
+                    </ng-container>
+                  </div>
+              </div>
+               <!--Input ¿-->
+              <div class="col-12 col-md-2">
+                <label for="prorroga_meses" class="col-form-label">Preaviso prórroga en meses</label>
+              </div>
+              <div class="col-12 col-md-2">
+                <input type="text" id="prorroga_meses" class="form-control" formControlName="prorroga_meses">
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.prorroga_meses
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('prorroga_meses', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+            </div>
+        </div>
+       </div>
+       <!--Fin de los da datos del contratista -->
+        <!--Documentación del contrato-->
+
+        <div class="contenedor border border-secondary rounded mt-4 mb-4" >
+            <div class=" p-3 mb-2 bg-secondary text-white" id="subcontenedor">
+                <div class="m-0 ">
+                    <label  class="col-form-label ">DOCUMENTACIÓN DEL CONTRATO</label>
+                </div>
+            </div>
+          <div class="row my-3 ps-2 pe-2">
+             <!--Input tipo de documento-->
+              <div class="col-12 col-md-2">
+                <label for="tipo_doc" class="col-form-label">Tipo de documento</label>
+              </div>
+              <div class="col-12 col-md-10">
+                <input type="file" id="tipo_doc" class="form-control" formControlName="tipo_doc" >
+                <div class="validationErrorRed ion-text-center">
+
+                  <ng-container
+                    *ngFor="
+  
+                      let validation of validationsMessage.tipo_doc
+  
+                    "
+  
+                  >
+  
+                    <div *ngIf="isValid('tipo_doc', validation.type)">
+  
+                      <small>{{ validation.message }}</small>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+          </div>
+          <div class="row my-3 ps-2 pe-2">
+            <!--Input Contrato Suscrito-->
+             <div class="col-12 col-md-2">
+               <label for="contrato_susc" class="col-form-label">contrato Suscrito</label>
+             </div>
+             <div class="col-12 col-md-10">
+               <input type="file" id="contrato_susc" class="form-control" formControlName="contrato_susc" >
+               <div class="validationErrorRed ion-text-center">
+
+                <ng-container
+                  *ngFor="
+
+                    let validation of validationsMessage.contrato_susc
+
+                  "
+
+                >
+
+                  <div *ngIf="isValid('contrato_susc', validation.type)">
+
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+             </div>
+         </div>
+         <div class="row my-3 ps-2 pe-2">
+          <!--Input Acta de Inicio-->
+           <div class="col-12 col-md-2">
+             <label for="acta_inicio" class="col-form-label">Acta de Inicio</label>
+           </div>
+           <div class="col-12 col-md-10">
+             <input type="file" id="acta_inicio" class="form-control" formControlName="acta_inicio">
+             <div class="validationErrorRed ion-text-center">
+
+              <ng-container
+                *ngFor="
+
+                  let validation of validationsMessage.acta_inicio
+
+                "
+
+              >
+
+                <div *ngIf="isValid('acta_inicio', validation.type)">
+
+                  <small>{{ validation.message }}</small>
+                </div>
+              </ng-container>
+            </div>
+           </div>
+         </div>
+            
+        </div>
+      <!--Fin documentación del contrato-->
+       <!--Documentación Anexos-->
+
+       <div class="contenedor border border-secondary rounded mt-4 mb-4" >
+        <div class=" p-3 mb-2 bg-secondary text-white" id="subcontenedor">
+            <div class="m-0 ">
+                <label  class="col-form-label ">DOCUMENTACIÓN ANEXOS</label>
+            </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+           <!--Input tipo de documento anexos-->
+            <div class="col-12 col-md-4">
+              <label for="tipo_doc_anexos" class="col-form-label">Tipo de Documento</label>
+            </div>
+            <div class="col-12 col-md-8">
+              <input type="file" id="tipo_doc_anexos" class="form-control" formControlName="tipo_doc_anexos" >
+              <div class="validationErrorRed ion-text-center">
+
+                <ng-container
+                  *ngFor="
+
+                    let validation of validationsMessage.tipo_doc_anexos
+
+                  "
+
+                >
+
+                  <div *ngIf="isValid('tipo_doc_anexos', validation.type)">
+
+                    <small>{{ validation.message }}</small>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+        </div>
+        <div class="row my-3 ps-2 pe-2">
+          <!--Input Propuesta-->
+           <div class="col-12 col-md-4">
+             <label for="propuesta" class="col-form-label">Propuesta</label>
+           </div>
+           <div class="col-12 col-md-8">
+             <input type="file" id="propuesta" class="form-control" formControlName="propuesta" >
+             <div class="validationErrorRed ion-text-center">
+
+              <ng-container
+                *ngFor="
+
+                  let validation of validationsMessage.propuesta
+
+                "
+
+              >
+
+                <div *ngIf="isValid('propuesta', validation.type)">
+
+                  <small>{{ validation.message }}</small>
+                </div>
+              </ng-container>
+            </div>
+           </div>
+       </div>
+       <!--Input Certificado de existencia-->
+       <div class="row my-3 ps-2 pe-2">
+        
+         <div class="col-12 col-md-4">
+           <label for="certificado_exis" class="col-form-label">Certificado de Existencia y Representación Legal</label>
+         </div>
+         <div class="col-12 col-md-8">
+           <input type="file" id="certificado_exis" class="form-control" formControlName="certificado_exis">
+           <div class="validationErrorRed ion-text-center">
+
+            <ng-container
+              *ngFor="
+
+                let validation of validationsMessage.certificado_exis
+
+              "
+
+            >
+
+              <div *ngIf="isValid('certificado_exis', validation.type)">
+
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+         </div>
+       </div>
+          
+      
+         <!--Input Representante legal-->
+         <div class="row my-3 ps-2 pe-2" >
+        
+          <div class="col-12 col-md-4" >
+            <label for="cc_legal" class="col-form-label">CC Representante legal Contratista</label>
+          </div>
+          <div class="col-12 col-md-8">
+            <input type="file" id="cc_legal" class="form-control" formControlName="cc_legal" >
+            <div class="validationErrorRed ion-text-center">
+
+              <ng-container
+                *ngFor="
+
+                  let validation of validationsMessage.cc_legal
+
+                "
+
+              >
+
+                <div *ngIf="isValid('cc_legal', validation.type)">
+
+                  <small>{{ validation.message }}</small>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+     
+      <div class="row my-3 ps-2 pe-2">
+        
+        <div class="col-12 col-md-4">
+          <label for="rut" class="col-form-label">RUT</label>
+        </div>
+        <div class="col-12 col-md-8">
+          <input type="file" id="rut" class="form-control" formControlName="rut" >
+          <div class="validationErrorRed ion-text-center">
+
+            <ng-container
+              *ngFor="
+
+                let validation of validationsMessage.rut
+
+              "
+
+            >
+
+              <div *ngIf="isValid('rut', validation.type)">
+
+                <small>{{ validation.message }}</small>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Fin documentación del contrato-->
+       <!--Polizas de Garantía-->
+       <div class="contenedor border border-secondary rounded mt-4 mb-4" >
+        <div class=" p-3 mb-2 bg-secondary text-white" id="subcontenedor">
+            <div class="m-0 ">
+                <label  class="col-form-label ">POLIZAS DE GARANTÍA</label>
+            </div>
+        </div>
+        <div class="container">
+          <div class="row my-3 ps-2 pe-2">
+        
+            <div class="col-3 col-md-4">
+              <label for="cc_legal" class="col-form-label">Tipo de Póliza</label>
+            </div>
+            <div class="col-2 col-md-3">
+              <label for="cc_legal" class="col-form-label">Cobertura</label>
+            </div>
+            <div class="col-3 col-md-3">
+              <label for="cc_legal" class="col-form-label">Vigencia</label>
+            </div>
+            <div class="col-2 col-md-1">
+              <label for="cc_legal" class="col-form-label">Expedida</label>
+            </div>
+            <div class="col-2 col-md-1">
+              <label for="cc_legal" class="col-form-label">Aprobada</label>
+            </div>
+           </div>
+           <div class="row my-3 ps-2 pe-2">
+            
+            <div class="col-3 col-md-4">
+              <label  class="col-form-label">Cumplimiento</label>
+            </div>
+            <div class="col-2 col-md-3">
+              <label  class="col-form-label">20%</label>
+            </div>
+            <div class="col-3 col-md-3">
+              <label  class="col-form-label">Duración del Contrato y 4 meses más</label>
+            </div>
+            <div class="col-2 col-md-1">
+              <input type="checkbox" class="form-check-input" formControlName="cumplimiento_expedida">
+            </div>
+            <div class="col-2 col-md-1">
+              <input type="checkbox"  class="form-check-input" formControlName="cumplimiento_aprobada">
+            </div>
+            
+           </div>
+           <div class="row my-3 ps-2 pe-2">
+            
+            <div class="col-3 col-md-4">
+              <label  class="col-form-label">Amparo pago de Salarios</label>
+            </div>
+            <div class="col-2 col-md-3">
+              <label  class="col-form-label">10%</label>
+            </div>
+            <div class="col-3 col-md-3">
+              <label  class="col-form-label">Duración del Contrato y 4 meses más</label>
+            </div>
+            <div class="col-2 col-md-1">
+              <input type="checkbox" class="form-check-input" formControlName="amparoPag_expedida">
+            </div>
+            <div class="col-2 col-md-1">
+              <input type="checkbox"  class="form-check-input" formControlName="amparoPag_Aprobada">
+            </div>
+            
+           </div>
+           <div class="row my-3 ps-2 pe-2">
+            
+            <div class="col-3 col-md-4">
+              <label  class="col-form-label">Calidad del Servicio</label>
+            </div>
+            <div class="col-2 col-md-3">
+              <label  class="col-form-label">20%</label>
+            </div>
+            <div class="col-3 col-md-3">
+              <label  class="col-form-label">Duración del Contrato y 4 meses más</label>
+            </div>
+          
+            <div class="col-2 col-md-1">
+              <input type="checkbox" class="form-check-input" formControlName="calidad_expedida">
+            </div>
+            <div class="col-2 col-md-1">
+              <input type="checkbox"  class="form-check-input" formControlName="calidad_Aprobada">
+            </div>
+            
+           </div>
+        </div>
+       
+       <div class="row my-3 ps-2 pe-2">
+        <div class="col-6 col-md-6 ">
+          <a href="" class="link-info">Seguimientos</a>
+        </div>
+        <div class="col-6 col-md-6 ">
+          <a href="" class="link-info">Prórrogas</a>
+        </div>
+       </div>
+       <div class="row ps-2 pe-2 ">
+        <div class="col-4">
+          <label  for="comentarios" class="col-form-label">Comentarios:</label>
+       </div>
+       </div>
+       <div class="row "></div>
+        <div class="col-1 w-100 p-3">
+          <textarea id="comentarios" class="col-form-control w-100 p-4 " formControlName="comentarios"></textarea>
+       </div>
+       </div>
+
+   
+
+  <!--Fin de las polizas de garantía-->
+
+       <div class=" w-50 p-2" >
+           <input class="btn btn-primary my-2 w-40 p-2 " type="submit" value="Enviar" >
+       </div>
+    </form>
+
+    <div>
+     
+        Valido: {{form.valid | json}}
+      
+       
+    </div>
+    <pre>Form values: {{ form?.value | json }}</pre>
+</div>
+

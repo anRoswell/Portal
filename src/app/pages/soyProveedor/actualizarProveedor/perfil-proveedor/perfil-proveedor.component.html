@@ -1,0 +1,213 @@
+<div class="container">
+    <div class="titulo d-flex flex-column justify-content-center  align-items-center">
+        <h2 class="">Perfil Proveedor</h2>
+        <div class="divImg text-center">
+            <img [src]="iconUser" alt="">
+        </div>
+    </div>
+   
+   
+   
+    <div class="datosPersonales" *ngIf="proveedor">
+        <h1>Datos Basicos</h1>
+        <div class="row mb-3">
+          <div class="col-md-2 col-lg-2">
+            <div>
+              <label for="email" class="form-label">Fecha Envio</label>
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.prvFechaEnvio.split('T')[0]"
+             readonly
+            />
+             
+              
+           
+            </div>
+          </div>
+          <div class="col-md-7 col-lg-7">
+            <div>
+              <label for="email" class="form-label"
+                >Nombre o Razón social de la emepresa</label
+              >
+             
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.prvNombreProveedor"
+             readonly
+            />
+             
+              
+            </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+            <div>
+              <label for="email" class="form-label">No. Documento</label>
+             
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.prvNit"
+             readonly
+            />
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4 col-lg-4">
+            <div>
+              <label for="email" class="form-label"
+                >Dirección completa de la empresa</label
+              >
+             
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.prvDireccion"
+             readonly
+            />
+              
+            </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+            <div>
+              <label for="email" class="form-label">Departamento</label>
+              
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.nombreDepartamento"
+             readonly
+            />
+              
+            </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+            <div>
+              <label for="email" class="form-label">Ciudad</label>
+             
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.nombreCiudad"
+             readonly
+            />
+             
+            </div>
+          </div>
+
+          <div class="col-md-2 col-lg-2">
+            <div>
+              <label for="email" class="form-label">Telefono(s)</label>
+             
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.prvTelefono"
+             readonly
+            />
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-8 col-lg-8">
+            <div>
+              <label for="email" class="form-label"
+                >Persona contacto (Proveedor)
+              </label>
+             
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.prvContacto"
+             readonly
+            />
+              
+            </div>
+          </div>
+
+          <div class="col-md-4 col-lg-4">
+            <div>
+              <label for="email" class="form-label">Telefono Móvil</label>
+              <input
+              type="text"
+              class="form-control"
+           
+             readonly
+            />
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-4 col-lg-4">
+            <div>
+              <label for="email" class="form-label"
+                >Correo Electronico 1</label
+              >
+             
+              <input
+              type="text"
+              class="form-control"
+             [value]="proveedor.prvRteLegalEmail"
+             readonly
+            />
+            
+            </div>
+          </div>
+
+          <div class="col-md-4 col-lg-4">
+            <div>
+              <label for="email" class="form-label"
+                >Correo Electronico 2</label
+              >
+              <input
+              type="text"
+              class="form-control"
+           
+             readonly
+            />
+             
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <div class="d-grid gap-3 d-md-flex justify-content-md-center margintop">
+                <button type="submit" class="btn btn-block btn-primary"
+                (click)="
+                openModalWithComponent(
+                  proveedor.id,
+                  proveedor,
+                  'leer',
+                  'consultar'
+                )
+              ">
+                  <fa-icon [icon]="faList"></fa-icon>
+                  Ver Detalle
+                </button>
+        
+                <button type="button" class="btn btn-warning" 
+                (click)="
+                openModalWithComponent(
+                  proveedor.id,
+                  proveedor,
+                  'leer',
+                  'editar'
+                )
+              ">
+                  <fa-icon [icon]="faEdit"></fa-icon>
+                  Editar
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+</div>

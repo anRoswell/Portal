@@ -1,0 +1,194 @@
+<header>
+  <nav
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light colorBack border-bottom box-shadow mb-3"
+  >
+    <div class="container-fluid">
+      <img class="navbar-brand imgLogo" [src]="logo" alt="" />
+      <a class="navbar-brand textoHeader" [routerLink]="['/']"
+        >Portal de Proveedores</a
+      >
+
+      <div
+        class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+      >
+        <ul class="navbar-nav flex-grow">
+          <!--<li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link text-dark" [routerLink]="['/perfil']">Perfil</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Fetch data</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link text-dark" [routerLink]="['/todo']">Todo</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link text-dark" [routerLink]="['/token']">JWT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="/api" target="_blank">API</a>
+            </li>-->
+
+          <!--<li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
+            </li>-->
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!--------------------ingreso------->
+<div class="container mt-4 mb-2">
+  <div class="row d-flex flex-row justify-content-center alig-items-center">
+    <div
+      class="col-md-6 d-flex flex-row justify-content-center alig-items-center"
+    >
+      <div class="card2" (click)="nagvegar('resgistro-proveedor')">
+        <img
+          class="card-img-top2"
+          src="https://via.placeholder.com/150"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p class="card-text">
+            Registrarme como Proveedor de Urbaser Colombia
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="col-md-6 d-flex flex-row justify-content-center alig-items-center"
+    >
+      <div class="card2" (click)="nagvegar('login')">
+        <img
+          class="card-img-top2"
+          src="https://via.placeholder.com/150"
+          alt="Card image cap"
+        />
+        <div class="card-body">
+          <p class="card-text">Soy Proveedor de Urbaser Colombia</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--------------------Noticias------->
+<div class="container">
+  <!-- 
+
+[singleSlideOffset]="false"
+          [noWrap]="true"
+          [pauseOnFocus]="false"
+          [noPause]="false"
+          [startFromIndex]="0"
+          [isAnimated]="true"
+          [interval]="5000"
+          
+          [showIndicators]="false"
+          [indicatorsByChunk]="true"
+    -->
+
+  <carousel
+    [itemsPerSlide]="itemsPerSlide"
+    [showIndicators]="false"
+    class="carousel"
+    (slideRangeChange)="onSlideRangeChange($event)"
+  >
+    <slide class="sliderItem" *ngFor="let slide of slides; let index = index">
+      <img [src]="slide.image" alt="image slide" class="imgslider" />
+      <div class="carousel-caption">
+        <h4>Slide {{ index }}</h4>
+      </div>
+    </slide>
+  </carousel>
+</div>
+
+<!--------------------Footer------->
+<footer class="bg-light text-center text-lg-start text-md-start pt-2">
+  <!-- Grid container -->
+  <div class="container-fluid">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-1 col-md-1 mb-1">
+        <img
+          class="imgFooter"
+          src="https://urbaser.co/wp-content/uploads/2021/01/logo-urbaser-color.svg"
+          alt=""
+        />
+      </div>
+
+      <div class="col-lg-3 col-md-3 mb-4 mb-md-0">
+        <p class="footerTitulo">Urbaser Colombia Holding</p>
+        <p class="subtitle">
+          <img
+            class="iconFooter"
+            src="https://urbaser.co/wp-content/themes/UrbaserColombia/img/icon-mail-footer.svg"
+            alt=""
+          />
+          Denuncias:
+        </p>
+
+        <p class="textoCorreo">lineaetica@urbaser.co</p>
+        <p class="textoCorreo">(+57)1 5802145 Ext. 2080</p>
+
+        <p class="subtitle">
+          <img
+            class="iconFooter"
+            src="https://urbaser.co/wp-content/themes/UrbaserColombia/img/icon-marker-footer.svg"
+            alt=""
+          />
+          Calle 100 #19-10, Ed. Torre Azul - P. 2 y 9
+          <br />
+          Bogotá D.C., Colombia
+        </p>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-2 col-md-2 mb-4 mb-md-0">
+        <p class="footerTitulo">Quines Somos</p>
+
+        <p class="subtitle">Sostenibilidad</p>
+        <p class="subtitle">Transparencia</p>
+      </div>
+
+      <div class="col-lg-2 col-md-2 mb-4 mb-md-0">
+        <p class="footerTitulo">Actualidad</p>
+
+        <p class="subtitle">Noticias</p>
+        <p class="subtitle">Sala de prensa</p>
+      </div>
+
+      <div class="col-lg-2 col-md-2 mb-4 mb-md-0">
+        <p class="footerTitulo">Contacto</p>
+
+        <p class="subtitle">Canales de atención</p>
+        <p class="subtitle">Preguntas frecuentes</p>
+      </div>
+
+      <div class="col-lg-1 col-md-1 mb-4 mb-md-0">
+        <img
+          class="imgFooter2"
+          src="https://urbaser.co/wp-content/uploads/2021/01/logo-superservicios.svg"
+          alt=""
+        />
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright 
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+     Copyright -->
+</footer>

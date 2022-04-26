@@ -1,0 +1,95 @@
+<!--<p>This component demonstrates fetching data from the server.</p>-->
+
+<p *ngIf="!datos"><em>Loading...</em></p>
+<div class="row">
+  <div class="col-md-12 divTitulo">
+    <h2 id="tableLabel">Permisos por perfiles</h2>
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="openModalWithComponent()"
+      *appRole="['Grabar']"
+    >
+      <fa-icon [icon]="faPlus"></fa-icon>
+      Nuevo
+    </button>
+  </div>
+</div>
+
+<table class="table table-striped" aria-labelledby="tableLabel" *ngIf="datos">
+  <thead>
+    <tr>
+      <th>Perfil</th>
+      <th>Menu</th>
+      <th>Ejecutar</th>
+      <th>Leer</th>
+      <th>Editar</th>
+      <th>Grabar</th>
+      <th>Borrar</th>
+      <th>Consultar</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let menu of datos">
+      <td>{{ menu.pmpNombrePerfil }}</td>
+      <td>{{ menu.pmpNombreMenu }}</td>
+      <td>
+        <fa-icon
+          [icon]="menu.pmpEjecutar ? faCheckCircle : faTimesCircle"
+          [class]="menu.pmpEjecutar ? 'iconTrue' : 'iconFalse'"
+        ></fa-icon>
+      </td>
+      <td>
+        <fa-icon
+          [icon]="menu.pmpLeer ? faCheckCircle : faTimesCircle"
+          [class]="menu.pmpLeer ? 'iconTrue' : 'iconFalse'"
+        ></fa-icon>
+      </td>
+      <td>
+        <fa-icon
+          [icon]="menu.pmpEditar ? faCheckCircle : faTimesCircle"
+          [class]="menu.pmpEditar ? 'iconTrue' : 'iconFalse'"
+        ></fa-icon>
+      </td>
+      <td>
+        <fa-icon
+          [icon]="menu.pmpGrabar ? faCheckCircle : faTimesCircle"
+          [class]="menu.pmpGrabar ? 'iconTrue' : 'iconFalse'"
+        ></fa-icon>
+      </td>
+      <td>
+        <fa-icon
+          [icon]="menu.pmpBorrar ? faCheckCircle : faTimesCircle"
+          [class]="menu.pmpBorrar ? 'iconTrue' : 'iconFalse'"
+        ></fa-icon>
+      </td>
+      <td>
+        <fa-icon
+          [icon]="menu.pmpConsultar ? faCheckCircle : faTimesCircle"
+          [class]="menu.pmpConsultar ? 'iconTrue' : 'iconFalse'"
+        ></fa-icon>
+      </td>
+      <td>
+        <button
+          type="button"
+          class="btn btn-warning"
+          (click)="editar(menu)"
+          *appRole="['Editar']"
+        >
+          <fa-icon [icon]="faEdit"></fa-icon>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger btnDelete"
+          (click)="delete(menu.id)"
+          *appRole="['Borrar']"
+        >
+          <fa-icon [icon]="faTimes"></fa-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p class="text-center" *ngIf="datos.length == 0">Sin registro en la tabla</p>
